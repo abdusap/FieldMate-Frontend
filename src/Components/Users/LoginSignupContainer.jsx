@@ -10,9 +10,6 @@ function LoginSignupContainer({form}) {
         }}
         className="flex background container-fluid h-screen  justify-center items-center px-5 md:px-0"
       >
-        {/* backdropFilter:'blur(100px)' */}
-        {/* filter: blur(5px); */}
-
       {form}
       </div>
   )

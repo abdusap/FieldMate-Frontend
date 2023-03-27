@@ -1,13 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "../Components/TurfPortal/Sidebar";
+import Sidebar from "../Components/Admin/Sidebar";
 
-function TurfLayout() {
+
+function AdminLayout() {
   return (
     <div className="flex ">
-      <Navbar />
+      <Sidebar />
       <div className="flex text-black  h-screen flex-col w-screen">
-        <div className="flex bg-slate-600  h-fit p-3 justify-between  ">
+        <div className="flex bg-black  h-fit p-3 justify-between  ">
           <h1 className="font-bold text-white text-xl">FieldMate</h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +25,7 @@ function TurfLayout() {
             />
           </svg>
         </div>
-        <div className="p-3 text-2xl md:text-3xl ">
+        <div className="p-3 text-2xl md:text-3xl bg-slate-200">
           <Outlet />
         </div>
       </div>
@@ -32,4 +33,4 @@ function TurfLayout() {
   );
 }
 
-export default TurfLayout;
+export default AdminLayout;

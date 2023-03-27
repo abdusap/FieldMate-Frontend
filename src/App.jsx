@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AdminRoute from "./Routes/AdminRoute";
 import TurfRoute from "./Routes/TurfRoute";
 import UserRoute from "./Routes/UserRoute";
+
 
 function App() {
   return (
@@ -9,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/*" element={<UserRoute />} />
           <Route path="/turf/*" element={<TurfRoute />}></Route>
-          <Route path="/*" element={'Not found'} />
+          <Route path="/admin/*" element={<AdminRoute/>} />
         </Routes>
       </Router>
     </div>

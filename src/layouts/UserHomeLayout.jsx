@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
-
 function UserHomeLayout() {
   const [isMobile, setIsMobile] = useState(false);
-  const [toggle,setToggle] = useState(false)
-  function handleNav(){
-    setToggle(()=>!toggle)
+  const [toggle, setToggle] = useState(false);
+  function handleNav() {
+    setToggle(() => !toggle);
   }
   console.log(toggle);
   useEffect(() => {
@@ -23,7 +22,7 @@ function UserHomeLayout() {
     // Remove event listener on unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
- 
+
   return (
     <div className="container-fluid">
       <div
@@ -62,22 +61,38 @@ function UserHomeLayout() {
             <button className="bg-white text-black p-1 font-semibold rounded-full border md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
               Calicut
             </button>
-            {isMobile?
-            <svg onClick={()=>handleNav()} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 flex self-center m-2 cursor-pointer">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
-          </svg>
-          : 
-          <Link to='/login'>
-                   <button className="bg-black text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2">
-              SignIn
-            </button> 
-          </Link>
-            }
+            {isMobile ? (
+              <svg
+                onClick={() => handleNav()}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 flex self-center m-2 cursor-pointer"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                />
+              </svg>
+            ) : (
+              <Link to="/login">
+                <button className="bg-black text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2">
+                  SignIn
+                </button>
+              </Link>
+            )}
           </div>
         </div>
-        <div className={`flex bg-white md:flex-row ${toggle && 'flex-col'} gap-3 md:gap-10  md:p-3  pl-5 md:pl-10 text-black`}>
+        <div
+          className={`flex bg-white md:flex-row ${
+            toggle && "flex-col"
+          } gap-3 md:gap-10  md:p-3  pl-5 md:pl-10 text-black`}
+        >
           {/* <h1>hahf</h1> */}
-          {isMobile&&toggle && (
+          {isMobile && toggle && (
             <div className="pt-3">
               <input type="text" className="border  focus:outline-none" />
               <button className="bg-black text-white pr-2 pl-2 ml-2 rounded-md ">
@@ -94,14 +109,15 @@ function UserHomeLayout() {
           <div>
             <button>Badminton</button>
           </div>
-          {isMobile&&toggle && <div>
-            <button className="font-semibold">Login/Signup</button>
-          </div>}
+          {isMobile && toggle && (
+            <div>
+              <button className="font-semibold">Login/Signup</button>
+            </div>
+          )}
         </div>
-        
       </nav>
 
- <Outlet/>
+      <Outlet />
       <footer>
         <div className="flex md:flex-row flex-col border-b  border-gray-500 w-fill border-t ">
           <div className="flex flex-grow md:pl-32 md:justify-start justify-center">
@@ -117,10 +133,10 @@ function UserHomeLayout() {
             <h1 className="text-xs md:text-lg self-center">
               Join our Network And Grow Your Business
             </h1>
-            <Link to={'/turf/login'}>
-            <button className="bg-green-700 px-2 rounded-md ml-3 md:h-3/4 md:self-center">
-              Join Now
-            </button>
+            <Link to={"/turf/login"}>
+              <button className="bg-green-700 px-2 rounded-md ml-3 md:h-3/4 md:self-center">
+                Join Now
+              </button>
             </Link>
           </div>
         </div>
