@@ -1,10 +1,10 @@
 import React from 'react'
+import TurfVericationContainer from '../../Components/Admin/TurfVericationContainer'
 
 function TurfVerify() {
   return (
     <>
-             <h1 className="font-bold text-xl md:text-2xl">Turf Verify</h1>
-
+            <TurfVericationContainer/>
     </>
   )
 }

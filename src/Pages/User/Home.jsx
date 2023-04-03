@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import decodeAuthToken from '../../Authentication/DecodeAuthToken'
+import getAuthToken from '../../Authentication/GetAuthToken'
 import HomeCarousel from '../../Components/Users/HomeCarousel'
 import HomeSectionMeet from '../../Components/Users/HomeSection'
 import HomeSectionProperty from '../../Components/Users/HomeServices'
@@ -6,6 +9,18 @@ import HomeSectionProperty from '../../Components/Users/HomeServices'
 
 
 function Home() {
+   const navigate=useNavigate()
+  useEffect(()=>{
+    const token=getAuthToken()
+    console.log(token)
+    if(token){
+      const data=decodeAuthToken()
+      console.log(data)
+    }
+    // else(
+    //  navigate('/login')
+    // )
+  },[])
   return (
     <>
     {/* <Navbar/> */}

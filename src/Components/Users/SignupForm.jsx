@@ -7,9 +7,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signupApi } from "../../Helpers/UserApi";
 import Swal from "sweetalert2";
-import axiosUser from "../../Config/Api";
+// import UserBase from "../../Config/Api";
+
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
+import UserBaseApi from "../../Config/UserBaseApi";
 
 function SignupForm() {
   const navigate=useNavigate()
@@ -45,7 +47,7 @@ function SignupForm() {
               // };
               formData.otp=otp
               console.log(formData);
-              return axiosUser
+              return UserBaseApi
                 .post("/otp", formData)
                 .then((response) => {
                   if (response.data.ok) {

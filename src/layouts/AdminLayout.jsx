@@ -25,7 +25,7 @@ function AdminLayout() {
             />
           </svg>
         </div>
-        <div className="p-3 text-2xl md:text-3xl bg-slate-200">
+        <div className="p-3 text-2xl md:text-3xl bg-slate-200 h-full">
           <Outlet />
         </div>
       </div>

@@ -4,6 +4,7 @@ import { loginApi } from "../../Helpers/UserApi";
 import loginValidation from "../../Validation/userLoginValidation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import setAuthToken from "../../Authentication/SetAuthToken";
 
 
 
@@ -17,6 +18,10 @@ function LoginForm() {
     loginValidation.validate(data).then((validatedData)=>{
         loginApi(validatedData).then((response)=>{
           if(response.data.verify){
+            console.log(response.data)
+            const token=response.data.token
+            localStorage.setItem('token',token)
+            setAuthToken(token)
             navigate('/')
           }
           else if(!response.data.verify){

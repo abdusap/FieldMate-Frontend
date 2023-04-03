@@ -1,12 +1,13 @@
 // import axios from "axios";
-import axiosUser from "../Config/Api";
+// import UserBaseApi from "../Config/Api";
+import UserBaseApi from "../Config/UserBaseApi"
 
 export const signupApi=async(data)=>{
-   const resData =await axiosUser.post("/signup",data)
+   const resData =await UserBaseApi.post("/signup",data)
    return resData
 }
 
 export const loginApi=async(data)=>{
-   const resData=await axiosUser.post("/login",data)
+   const resData=await UserBaseApi.post("/login",data)
    return resData
 }
