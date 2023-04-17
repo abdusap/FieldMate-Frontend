@@ -55,6 +55,11 @@ function Navbar() {
               {expand && <span className="text-white ">Dashboard</span>}
             </span>
           </NavLink>
+          <NavLink 
+          to={"details"}
+          className={({ isActive }) =>
+          isActive ? "text-red-600" : "text-white"
+        }>
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,6 +78,7 @@ function Navbar() {
 
             {expand && <span className="text-white ">Details</span>}
           </span>
+          </NavLink>
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"

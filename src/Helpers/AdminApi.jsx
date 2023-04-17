@@ -36,3 +36,12 @@ export const allLocationApi=async(data)=>{
     const resData=await AdminApi.post("/all_location",data)
     return resData
 }
+
+export const allTurfDetailForVerifyApi=async(data)=>{
+    const resData=await AdminApi.get("/all_turf",data)
+    return resData
+}
+export const acceptTurfApi=async(id)=>{
+    const resData=await AdminApi.patch(`/accept_turf:id=${id}`)
+    return resData
+}

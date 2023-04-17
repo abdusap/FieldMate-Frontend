@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { allLocationApi, turfSignupApi } from "../../Helpers/TurfApi,";
+import { Link, useNavigate } from "react-router-dom";
+import { allLocationApi, turfOtpApi, turfSignupApi } from "../../Helpers/TurfApi,";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup";
 import turfValidationSchema from "../../Validation/turfLoginValidation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 
-// import { allLocationApi } from "../../Helpers/AdminApi";
+
 
 
 function SignupForm() {
+  const navigate=useNavigate()
   const [allLocation,setAllLocation]=useState([])
   const {
     register,
@@ -29,7 +33,53 @@ function SignupForm() {
   const onHandleSubmit = async (turfData) => {
     console.log(turfData)
     turfSignupApi(turfData).then((res)=>{
-      console.log(res)
+      console.log(res.data.otp)
+      const OTP=res.data.otp
+      turfData.OTP=OTP
+      Swal.fire({
+        title: "Enter your OTP",
+        input: "number",
+        inputAttributes: {
+          autocapitalize: "off",
+          // maxLength: 6 // specify the max length of OTP here
+        },
+        showCancelButton: true,
+        confirmButtonText: "Verify",
+        showLoaderOnConfirm: true,
+        preConfirm: (otp) => {
+          turfData.EnteredOtp=otp
+          console.log(turfData);
+          return turfOtpApi(turfData)
+            .then((response) => {
+              if (response.data.ok) {
+                Swal.fire({
+                  title: "OTP verified!",
+                  text:"Your Account created successfully",
+                  icon: "success",
+                }).then(()=>{
+                  navigate('/turf/login')
+                })
+              }
+              if (!response.data.ok) {
+                throw new Error();
+              }
+            })
+            .catch((error) => {
+              Swal.showValidationMessage(`OTP Verification failed`);
+            });
+        },
+      });
+    }).catch((err)=>{
+      toast.error(err.response.data.error.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     })
   }
 
@@ -39,6 +89,7 @@ function SignupForm() {
       <div className="w-1/2 flex-grow p-3 hidden md:flex">
         <img src="/image/signin-image.jpg" alt="loginImage" />
       </div>
+      <ToastContainer />
       <div className="items-center md:items-start flex  flex-grow flex-col gap-5 pt-10 mb-8">
         <h1 className="text-3xl font-bold">Turf Sign up</h1>
           <form  onSubmit={handleSubmit(onHandleSubmit)}>

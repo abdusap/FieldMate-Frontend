@@ -1,9 +1,13 @@
 import React from 'react'
+import DetailsContainer from '../../Components/TurfPortal/DetailsContainer';
 
 function Details() {
   return (
-    <div>Details</div>
-  )
+    <>  
+<DetailsContainer/>
+</>  
+
+)
 }
 
 export default Details

@@ -4,6 +4,7 @@ import TurfLayout from "../layouts/TurfLayout";
 import Dashboard from "../Pages/TurfPortal/Dashboard";
 import Login from "../Pages/TurfPortal/Login";
 import Signup from "../Pages/TurfPortal/Signup";
+import Details from "../Pages/TurfPortal/Details";
 
 
 function TurfRoute() {
@@ -15,8 +16,8 @@ function TurfRoute() {
           element={<Dashboard/>}
         ></Route>
         <Route
-          path="profile"
-          element={<button className="p-4 bg-blue-700">hsdgfshdf</button>}
+          path="details"
+          element={<Details/>}
         ></Route>
       </Route>
       <Route
