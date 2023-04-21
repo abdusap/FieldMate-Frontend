@@ -1,11 +1,13 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit"
 
 const turfIdSlice=createSlice({
     name:'turfId',
-    initialState:{},
+    initialState:{
+        id:''
+    },
     reducers:{
-        addTurfId(state,action){
-            state.value=action.payload
+        addTurfId:(state,action)=>{
+            state.id=action.payload
         },
         removeTurfId(state,action){
             return {}
@@ -14,5 +16,5 @@ const turfIdSlice=createSlice({
        
 })
 
-export const {addTurfId,removeTurfId}=turfIdSlice
+export const {addTurfId,removeTurfId}=turfIdSlice.actions
 export const turfReducer=turfIdSlice.reducer

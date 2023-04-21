@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 
-function RuleAmenityModal({title,modal,setModal,handleSubmit}) {
+function RuleAmenityModal({title,modal,setModal,handleSubmit,data}) {
+  console.log(data)
     const [numBoxes, setNumBoxes] = useState(0);
   return (
     <>
@@ -16,7 +17,12 @@ function RuleAmenityModal({title,modal,setModal,handleSubmit}) {
         </div> 
         <div className="flex flex-col  p-5">
         <form  onSubmit={handleSubmit}>
-        {/* <input type="text" id="first_name" className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Location" /> */}
+          {data && data.map((data)=>{
+            return <input type="text" value={data} id="first_name" className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Location" />
+
+          })
+
+          }
         {/* <input type="text" id="first_name" className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Location" /> */}
         {/* <input type="text" id="first_name" className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Location" /> */}
         {/* <input type="text" id="first_name" className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Location" /> */}

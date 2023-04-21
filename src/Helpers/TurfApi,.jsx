@@ -22,8 +22,8 @@ export const turfDetailsApi=async(data,confi)=>{
     const resData=await TurfBaseApi.post("/turf_details",data)
     return resData
 }
-export const getAllSportsApi=async(data)=>{
-    const resData=await TurfBaseApi.get("/all_sports",data)
+export const getAllDetailsApi=async(data)=>{
+    const resData=await TurfBaseApi.get(`/all_turf_details?id=${data}`)
     return resData
 }
 export const addRulesApi=async(data)=>{
@@ -37,5 +37,13 @@ export const addAmenityApi=async(data)=>{
 
 export const loginApi=async(data)=>{
     const resData =await TurfBaseApi.post('/login',data)
+    return resData
+}
+export const addSlotApi=async(data)=>{
+    const resData =await TurfBaseApi.post('/add_slot',data)
+    return resData
+}
+export const getSlotApi=async(data)=>{
+    const resData =await TurfBaseApi.get(`/get_slot?id=${data}`)
     return resData
 }

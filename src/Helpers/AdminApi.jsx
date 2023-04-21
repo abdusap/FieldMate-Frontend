@@ -42,6 +42,10 @@ export const allTurfDetailForVerifyApi=async(data)=>{
     return resData
 }
 export const acceptTurfApi=async(id)=>{
-    const resData=await AdminApi.patch(`/accept_turf:id=${id}`)
+    const resData=await AdminApi.patch(`/accept_turf?id=${id}`)
+    return resData
+}
+export const rejectTurfApi=async(id)=>{
+    const resData=await AdminApi.patch(`/reject_turf?id=${id}`)
     return resData
 }

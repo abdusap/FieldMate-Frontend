@@ -5,6 +5,8 @@ import Dashboard from "../Pages/TurfPortal/Dashboard";
 import Login from "../Pages/TurfPortal/Login";
 import Signup from "../Pages/TurfPortal/Signup";
 import Details from "../Pages/TurfPortal/Details";
+import SlotManage from "../Pages/TurfPortal/SlotManage";
+
 
 
 function TurfRoute() {
@@ -19,6 +21,14 @@ function TurfRoute() {
           path="details"
           element={<Details/>}
         ></Route>
+        <Route
+          path="slots"
+          element={<SlotManage/>}
+        ></Route>
+        {/* <Route
+          path="add_slots"
+          element={<AddSlots/>}
+        ></Route> */}
       </Route>
       <Route
           path="/login"

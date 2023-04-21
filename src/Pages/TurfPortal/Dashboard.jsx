@@ -1,10 +1,16 @@
 import React from 'react'
 import Cards from '../../Components/TurfPortal/Cards'
 import Graph from '../../Components/TurfPortal/Graph'
+import { useSelector } from 'react-redux'
+
 
 function Dashboard() {
+  const id = useSelector((state) =>  state.turf);
+  console.log(useSelector((state) =>  state.turf))
+  console.log(id);
   return (
     <>
+
     <h1 className="font-bold text-xl md:text-2xl">Dashboard</h1>
     <div className='flex md:flex-row justify-around mt-2 md:mt-8 flex-col'>
       <Cards colour={'bg-blue-900'} head={'Current Booking'} body={'112'}/>

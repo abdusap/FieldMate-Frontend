@@ -1,13 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select';
-import { getAllSportsApi, turfDetailsApi } from '../../Helpers/TurfApi,';
+import { getAllDetailsApi, turfDetailsApi } from '../../Helpers/TurfApi,';
+import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2'
 
 
 
-function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
+
+function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal,setAmenityData,setRulesData,updated,setUpdated}) {
+  const turfId=useSelector((state)=>state.turf)
+  console.log(turfId);
+ 
+  const [turfData,setTurfData]=useState({})
+  const [turfDetails,setTurfDetails]=useState({})
+    const [sports,setSports]=useState([])
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [error, setError] = useState(false);
+    const [image, setImage] = useState([]);
   useEffect(()=>{
-    getAllSportsApi().then((res)=>{
-      console.log(res.data.allSports)
+    getAllDetailsApi(turfId.id).then((res)=>{
         
         const sport=res.data.allSports
         let convertedSports = sport.map(sport => {
@@ -17,13 +28,19 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
           };
         });
         setSports(convertedSports)
-        console.log(convertedSports)
+        setTurfData(res.data.details.turf[0])
+        setTurfDetails(res.data.details.details)
+        const sportsId=res.data.details.details.sports
+        const matchedSports=convertedSports.filter(sports=>{
+          return sportsId.includes(sports.value)
+        })
+        setSelectedOptions(matchedSports)
+        console.log(res.data.details.details.amenities);
+        setAmenityData(res.data.details.details.amenities)
+        setRulesData(res.data.details.details.rules)
     })
-  },[])
-    const [sports,setSports]=useState([])
-    const [selectedOptions, setSelectedOptions] = useState([]);
-    const [error, setError] = useState(false);
-    const [image, setImage] = useState([]);
+  },[updated])
+
     const config = {
       headres: {
         "Content-Type": "multipart/form-data",
@@ -39,7 +56,7 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
       if(!error){
         
         const formData=new FormData()
-        console.log(image)
+        formData.append('turfId',turfId.id)
         formData.append('groundName',groundName.current?.value)
         formData.append('website',website.current?.value)
         for (let i=0;i<image.length;i++){
@@ -50,7 +67,16 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
         console.log(selectedOptions)
         console.log(formData)
         turfDetailsApi(formData,config).then((res)=>{
-          console.log(res);
+          setUpdated(!updated)
+          if(res.data.success){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Changes has been saved',
+              showConfirmButton: false,
+              timer: 1200
+            })
+          }
         })
       }
    
@@ -103,21 +129,21 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
              <div className='md:w-1/2 flex-grow md:px-3'>
              <div>
             <label for="first_name" class="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Email</label>
-            <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Email" />
+            <input readOnly value={turfData?.email} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Email" />
         </div>
        
             
         <div>
             <label for="first_name" class="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Mobile</label>
-            <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Mobile" />
+            <input readOnly  value={turfData?.mobile} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Mobile" />
         </div>
         <div>
             <label for="first_name"  className="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Gio-Coordinates</label>
-            <input  type="text" id="first_name" name='gioCoordinates'  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Coordinates" />
+            <input readOnly  value={turfData?.gioCoordinates}  type="text" id="first_name" name='gioCoordinates'  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Coordinates" />
         </div>
         <div>
             <label for="first_name" class="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Location</label>
-            <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Location"/>
+            <input readOnly  value={turfData?.location} type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Location"/>
         </div>
        
 
@@ -135,11 +161,11 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
              <div className='md:w-1/2 flex-grow md:px-3'>
           <div>
             <label htmlFor="first_name" class="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Ground Name</label>
-            <input ref={groundName} type="text" id="first_name" name='groundName'   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Ground Name" required/>
+            <input ref={groundName} value={turfDetails?.groundName} onChange={(e) => setTurfDetails({ ...turfDetails, groundName: e.target.value })} type="text" id="first_name" name='groundName'   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Ground Name" required/>
         </div>
         <div>
             <label for="first_name" className="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Website</label>
-            <input ref={website} type="text" id="first_name" name='website'   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Website" required/>
+            <input ref={website} value={turfDetails?.website}   onChange={(e) => setTurfDetails({ ...turfDetails, website: e.target.value })} type="text" id="first_name" name='website'   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" placeholder="Website" required/>
         </div>
              <div>
             <label for="first_name" className="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Available Sports</label>
@@ -155,7 +181,7 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
       
         <div>
         <label className="block mb-2 mt-3 text-sm font-medium text-gray-900 " for="file_input">Upload file</label>
-<input onChange={handleImageChange} ref={images} multiple name='image' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" id="file_input" type="file" required/>
+<input onChange={handleImageChange} ref={images} multiple name='image' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5" id="file_input" type="file"/>
 {error &&
 <p className="mx-3 text-red-400 text-sm">
                 Only jpg | jpeg | png are allowed
@@ -167,14 +193,19 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal}) {
         <div>
         <label className="block mb-2 mt-3 text-sm font-medium text-gray-900 " for="file_input">Pictures</label>
     <div className='flex  md:flex-row flex-col'>
-<div className='relative ml-2 '>
-  <img className='w-32 h-20' src="/image/abc1.jpg" alt="Pictures" />
-  <p className='absolute top-0 right-2 text-xl font-bold text-red-700 cursor-pointer'>X</p>
-</div>
-<div className='relative ml-2 '>
+      {turfDetails?.image && turfDetails.image.map((name)=>
+       <div  className='relative ml-2 '>
+        <img className='w-32 h-20' src={name} alt="Pictures" />
+        <p className='absolute top-0 right-2 text-xl font-bold text-red-700 cursor-pointer'>X</p>
+      </div>
+      )
+
+        
+}
+{/* <div className='relative ml-2 '>
   <img className='w-32 h-20' src="/image/abc1.jpg" alt="Pictures" />
   <p className='absolute top-0 right-2  text-xl font-bold text-red-700 cursor-pointer'>X</p>
-</div>
+</div> */}
 
       </div>  
         </div>

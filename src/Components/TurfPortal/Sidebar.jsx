@@ -9,7 +9,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="flex bg-black h-screen  p-3 md:p-5 flex-col w-fit ">
+      <div className="flex bg-black h-auto  p-3 md:p-5 flex-col w-fit ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -79,6 +79,11 @@ function Navbar() {
             {expand && <span className="text-white ">Details</span>}
           </span>
           </NavLink>
+          <NavLink 
+          to={"slots"}
+          className={({ isActive }) =>
+          isActive ? "text-red-600" : "text-white"
+        }>
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -95,8 +100,9 @@ function Navbar() {
               />
             </svg>
 
-            {expand && <span className="text-white ">Booking</span>}
+            {expand && <span className="text-white ">SlotManage</span>}
           </span>
+          </NavLink>
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"

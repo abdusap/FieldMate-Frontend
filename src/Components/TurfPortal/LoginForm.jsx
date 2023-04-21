@@ -6,9 +6,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { loginApi } from "../../Helpers/TurfApi,";
 import { setTurfToken } from "../../Authentication/StoreAuthToken";
 import setAuthToken from "../../Authentication/SetAuthToken";
+import { useDispatch, useSelector } from "react-redux";
+import { addTurfId } from "../../Store/Slice/TurfIdSlice";
+
 
 function LoginForm() {
   const navigate=useNavigate()
+  const dispatch = useDispatch();
   const handleSubmit=(e)=>{
     e.preventDefault()
       const data={
@@ -17,9 +21,15 @@ function LoginForm() {
       }
       turfLoginValidation.validate(data).then((validatedData)=>{
         loginApi(validatedData).then((res)=>{
+          console.log(res.data);
           const token=res.data.token
           setTurfToken(token)
           // setAuthToken(token)
+          const details=res.data.account
+          const id=details._id
+          console.log(id)
+          dispatch(addTurfId(id));
+          
           navigate('/turf/dashboard')
         }).catch((err)=>{
         console.log(err.response.data.error.message);
@@ -70,7 +80,7 @@ function LoginForm() {
             name="password"
           />
         </div>
-        <button type="submit" className="text-white w-fit px-3 py-1 rounded-md bg-black">
+        <button type="submit" className="text-white w-fit px-3 py-1 mt-2 rounded-md bg-black">
           Login
         </button>
         </form>

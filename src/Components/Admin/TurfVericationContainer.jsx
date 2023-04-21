@@ -1,31 +1,51 @@
 import React, { useEffect,useState } from 'react'
 import TurfDetailsInVerification from './TurfDetailsInVerification'
-import { acceptTurfApi, allTurfDetailForVerifyApi } from '../../Helpers/AdminApi'
+import { acceptTurfApi, allTurfDetailForVerifyApi, rejectTurfApi } from '../../Helpers/AdminApi'
+import Swal from 'sweetalert2'
+
 
 
 function TurfVericationContainer() {
   const [allTurf ,setAllturf]=useState([])
+  const [updateStatus,setUpdateStatus]=useState(true)
   // let allTurf
   useEffect(()=>{
     allTurfDetailForVerifyApi().then((res)=>{
-      console.log(res.data.allTurf)
       setAllturf(res.data.allTurf)
       //  allTurf=res.data.allTurf
     })
-  },[])
+  },[updateStatus])
   const handleAccept=(id)=>{
-   
     // const data=new FormData()
     //    data.append(id)
     // const data.id=id
     // console.log(data)
     acceptTurfApi(id).then((res)=>{
-
+      setUpdateStatus(!updateStatus)
+        if(res.data.success){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Approved Mail has been send',
+            showConfirmButton: false,
+            timer: 1200
+          })
+        }
     })
-console.log(id)
   }
   const handleReject=(id)=>{
-console.log(id)
+    rejectTurfApi(id).then((res)=>{
+      setUpdateStatus(!updateStatus)
+      if(res.data.success){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Rejected Mail has been send',
+          showConfirmButton: false,
+          timer: 1200
+        })
+      }
+    })
   }
   return (
     <>
