@@ -17,3 +17,46 @@ export const Slots=[
      "09PM-10PM",
      "10PM-11PM",
   ]
+
+
+//   import React from "react";
+
+// export const slotsArray = [
+//   "04PM-05PM",
+//   "05PM-06PM",
+//   "06PM-07PM",
+//   "07PM-08PM",
+//   "08PM-09PM",
+//   "09PM-10PM",
+//   "10PM-11PM",
+// ];
+
+// const currentTime = new Date();
+
+// const availableSlots = slotsArray.filter((slot) => {
+//   const [startTime, endTime] = slot.split("-");
+//   const [startHour, startMinute] = startTime.split("PM")[0].split(":");
+//   const [endHour, endMinute] = endTime.split("PM")[0].split(":");
+//   const start = new Date(currentTime);
+//   start.setHours(parseInt(startHour) + 12, parseInt(startMinute), 0, 0);
+//   const end = new Date(currentTime);
+//   end.setHours(parseInt(endHour) + 12, parseInt(endMinute), 0, 0);
+//   return currentTime < end;
+// });
+
+// const Slots = () => {
+//   return (
+//     <>
+//       {availableSlots.map((slot) => (
+//         <div key={slot}>
+//           <label htmlFor={slot} className="block cursor-pointer">
+//             <span className="bg-green p-1">Available</span>
+//             <input type="radio" id={slot} name="slot" value={slot} className="" />
+//           </label>
+//         </div>
+//       ))}
+//     </>
+//   );
+// };
+
+// export default Slots;

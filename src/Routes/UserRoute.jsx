@@ -7,6 +7,7 @@ import Home from '../Pages/User/Home'
 import getAuthToken from '../Authentication/GetAuthToken'
 import TurfListing from '../Pages/User/TurfListing'
 import TurfDetails from '../Pages/User/TurfDetails'
+import SlotDetails from '../Pages/User/SlotDetails'
 // import Login from '../Pages/User/Login'
 // import User from '../Pages/User/Login/User'
 
@@ -36,6 +37,7 @@ function UserRoute() {
 
         <Route path='turf_listing' element={<TurfListing/>}></Route>
         <Route path='turf_details' element={<TurfDetails/>}></Route>
+        <Route path='slot_details' element={<SlotDetails/>}></Route>
         </Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>
