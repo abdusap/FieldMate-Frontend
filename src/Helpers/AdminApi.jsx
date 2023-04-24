@@ -1,5 +1,11 @@
 import AdminApi from "../Config/AdminBaseApi" 
 
+
+
+export const adminLoginApi=async(data)=>{
+    const resData=await AdminApi.post("/login",data)
+    return resData
+}
 export const addLocationApi=async(data)=>{
     const resData=await AdminApi.post("/location",data)
     return resData
