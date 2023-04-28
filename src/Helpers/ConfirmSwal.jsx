@@ -1,11 +1,10 @@
 import Swal from 'sweetalert2'
 
-function ConfirmSwal({text,api,id}) {
+function ConfirmSwal(api,id) {
   return (
-    
-    Swal.fire({
+Swal.fire({
   title: 'Are you sure?',
-  text: text,
+  // text: "You won't be able to revert this!",
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
@@ -14,17 +13,17 @@ function ConfirmSwal({text,api,id}) {
 }).then((result) => {
   if (result.isConfirmed) {
     api(id).then((res)=>{
-
-        
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Your action has been saved',
-            showConfirmButton: false,
-            timer: 1000
-        })
+      if(res.data.success){     
+      Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your action has been saved',
+                showConfirmButton: false,
+                timer: 1000
+            })
+          }
     })
-
+  
   }
 })
     

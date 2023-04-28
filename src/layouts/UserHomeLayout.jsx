@@ -4,6 +4,8 @@ import { Link, Outlet } from "react-router-dom";
 function UserHomeLayout() {
   const [isMobile, setIsMobile] = useState(false);
   const [toggle, setToggle] = useState(false);
+  console.log(isMobile);
+  console.log(toggle);
   function handleNav() {
     setToggle(() => !toggle);
   }
@@ -11,6 +13,7 @@ function UserHomeLayout() {
   useEffect(() => {
     function handleResize() {
       setIsMobile(window.innerWidth < 768);
+      setToggle(window.innerWidth > 768)
     }
 
     // Add event listener to update isMobile on resize
@@ -86,6 +89,7 @@ function UserHomeLayout() {
             )}
           </div>
         </div>
+        { toggle &&
         <div
           className={`flex bg-white md:flex-row ${
             toggle && "flex-col"
@@ -100,6 +104,7 @@ function UserHomeLayout() {
               </button>
             </div>
           )}
+          { <>
           <div className="">
             <button>Cricket</button>
           </div>
@@ -109,12 +114,14 @@ function UserHomeLayout() {
           <div>
             <button>Badminton</button>
           </div>
+          </>}
           {isMobile && toggle && (
             <div>
               <button className="font-semibold">Login/Signup</button>
             </div>
           )}
         </div>
+        }
       </nav>
 
       <Outlet />

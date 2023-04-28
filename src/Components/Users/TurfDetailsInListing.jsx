@@ -1,10 +1,10 @@
 import React from 'react'
 
-function TurfDetailsInListing() {
+function TurfDetailsInListing({imageUrl,turfName,location,sports,rating,offers}) {
   return (
     <>
        <div className='flex border  bg-white border-black mt-5 p-3'>
-        <div className='w-36 h-36 bg-slate-700 '>
+        <div className='w-36 h-36 bg-slate-700 ' style={{"backgroundImage":'url'}}>
         fdf
         </div>
         <div  className='pl-3'>

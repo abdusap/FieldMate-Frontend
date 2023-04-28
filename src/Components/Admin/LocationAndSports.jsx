@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
-import { addLocationApi, addSportsApi, editLocationApi, EditSportsApi, findLocationApi, findSportsApi, getLocationAndSportsApi } from '../../Helpers/AdminApi';
+import { addLocationApi, addSportsApi, blockLocationApi, blockSportsApi, editLocationApi, EditSportsApi, findLocationApi, findSportsApi, getLocationAndSportsApi } from '../../Helpers/AdminApi';
 import InputSwal from '../../Helpers/InputSwal';
 import TableLocationAndSports from './TableLocationAndSports';
 import ConfirmSwal from '../../Helpers/ConfirmSwal';
@@ -117,10 +117,14 @@ function LocationAndSports() {
     }
 
      const blockLocation=(id)=>{
-      // ConfirmSwal({text={"Are you "}})
+      ConfirmSwal(blockLocationApi,id).then(()=>{
+        setUpdated(!updated)
+      })
      }
      const blockSports=(id)=>{
-        
+      ConfirmSwal(blockSportsApi,id).then(()=>{
+        setUpdated(!updated)
+      })
      }
 
     return (

@@ -4,12 +4,17 @@ import { loginApi } from "../../Helpers/UserApi";
 import loginValidation from "../../Validation/userLoginValidation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import setAuthToken from "../../Authentication/SetAuthToken";
+// import setAuthToken from "../../Authentication/SetAuthToken";
+import { setUserToken } from "../../Authentication/StoreAuthToken";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../Store/Slice/UserSlice";
+
 
 
 
 function LoginForm() {
   const navigate=useNavigate()
+  const dispatch = useDispatch();
   const [data,setData]=useState({
     email: "",
     password: ""
@@ -20,8 +25,10 @@ function LoginForm() {
           if(response.data.verify){
             console.log(response.data)
             const token=response.data.token
-            localStorage.setItem('token',token)
-            setAuthToken(token)
+            const user=response.data.user
+            const data={id:user._id,name:user.name}
+            dispatch(addUser(data))
+            setUserToken(token)
             navigate('/')
           }
           else if(!response.data.verify){

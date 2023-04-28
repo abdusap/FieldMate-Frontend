@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 
 
 
-function ProtectedRoute({type,redirect}) {
+function ProtectedRoute({type,redirect,api}) {
     const [auth,setAuth]=useState(null)
     const token=localStorage.getItem(type)
     const navigate=useNavigate()

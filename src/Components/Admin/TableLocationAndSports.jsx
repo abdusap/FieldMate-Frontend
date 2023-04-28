@@ -18,6 +18,9 @@ function TableLocationAndSports({data,head,handleEdit,handleBlock,onClick}) {
                     Edit
                   </th>
                   <th scope="col" className="px-6 py-3">
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3">
                     Action
                   </th>
                 </tr>
@@ -37,10 +40,17 @@ function TableLocationAndSports({data,head,handleEdit,handleBlock,onClick}) {
                       Edit
                     </p>
                   </td>
+                  <td className='px-6 py-4'>
+                    {value.status?<p className='text-green-700'>Active</p>:<p className='text-red-700'>Blocked</p>
+
+                    }
+                  </td>
                   <td className="px-6 py-4 ">
-                    <p onClick={()=>handleBlock(value._id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">
+                    {value.status?<p onClick={()=>handleBlock(value._id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">
                       Block
-                    </p>
+                    </p>:<p onClick={()=>handleBlock(value._id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">
+                      Un-Block
+                    </p>}
                   </td>
                 </tr>)
                 })

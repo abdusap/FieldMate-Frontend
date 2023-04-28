@@ -6,6 +6,7 @@ import Dashboard from '../Pages/Admin/Dashboard'
 import Login from '../Pages/Admin/Login'
 import TurfVerify from '../Pages/Admin/TurfVerify'
 import LocationAndSportsPage from '../Pages/Admin/LocationAndSports'
+import ProtectedRoute from '../Helpers/ProtectedRoute'
 
 
 
@@ -13,12 +14,14 @@ function AdminRoute() {
   return (
     <>
     <Routes>
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/login' element={<Login/>}/>    
+        <Route element={<ProtectedRoute type={'admin'} redirect={'/admin/login'} />}>
         <Route path='/' element={<AdminLayout/>}>
           <Route path='dashboard' element={<Dashboard/>}/>
           <Route path='turf-verify' element={<TurfVerify/>}/>
           <Route path='location-and-sports' element={<LocationAndSportsPage/>}/>
             {/* <Route path='location' element={<LocationAndSports/>}/> */}
+        </Route>
         </Route>
     </Routes>
     </>

@@ -1,6 +1,6 @@
-const getAuthToken = () => {
-    return localStorage.getItem('token');
-  };
+// const getAuthToken = () => {
+//     return localStorage.getItem('token');
+//   };
   
-  export default getAuthToken;
+//   export default getAuthToken;
   

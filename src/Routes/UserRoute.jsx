@@ -16,18 +16,18 @@ import SlotDetails from '../Pages/User/SlotDetails'
 
 
 function UserRoute() {
-  console.log("userroute")
-  const[userExist,setUserExist]=useState()
-  console.log(userExist)
-  useEffect(()=>{
-    const token=getAuthToken()
-    if(token){
-      setUserExist(()=>true)
-    }else{
-       setUserExist(()=>false)
-    }
+  // console.log("userroute")
+  // const[userExist,setUserExist]=useState()
+  // console.log(userExist)
+  // useEffect(()=>{
+  //   const token=getAuthToken()
+  //   if(token){
+  //     setUserExist(()=>true)
+  //   }else{
+  //      setUserExist(()=>false)
+  //   }
 
-  },[])
+  // },[])
   return (
     <Routes>
         <Route path='/' element={<UserHomeLayout/>}>

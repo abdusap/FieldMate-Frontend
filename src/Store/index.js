@@ -3,6 +3,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 import { turfReducer } from "./Slice/TurfIdSlice";
+import { userReducer } from "./Slice/UserSlice";
+
 
 const persistConfig={
     key:'root',
@@ -12,7 +14,8 @@ const persistConfig={
 
 
 const reducer= combineReducers({
-   turf:turfReducer
+   turf:turfReducer,
+   user:userReducer
 })
 
 const persistedReducer= persistReducer(persistConfig,reducer)

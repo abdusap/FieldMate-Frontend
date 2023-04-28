@@ -10,11 +10,12 @@ import ProtectedRoute from "../Helpers/ProtectedRoute";
 
 
 
+
 function TurfRoute() {
   return (
     <Routes>
-      Route
-      <Route  element={<ProtectedRoute type={'turf'} redirect={'/turf/login'}/>}>
+     
+      <Route  element={<ProtectedRoute type={'turf'} redirect={'/turf/login'} />}>
       <Route path="/" element={<TurfLayout/>}>
         <Route
           path="dashboard"

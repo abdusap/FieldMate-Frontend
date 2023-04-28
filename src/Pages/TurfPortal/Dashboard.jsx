@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 function Dashboard() {
   const id = useSelector((state) =>  state.turf);
   console.log(useSelector((state) =>  state.turf))
-  console.log(id);
   return (
     <>
 

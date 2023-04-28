@@ -55,3 +55,12 @@ export const rejectTurfApi=async(id)=>{
     const resData=await AdminApi.patch(`/reject_turf?id=${id}`)
     return resData
 }
+export const blockLocationApi=async(id)=>{
+    const resData=await AdminApi.patch(`/block_location?id=${id}`)
+    return resData
+}
+
+export const blockSportsApi=async(id)=>{
+    const resData=await AdminApi.patch(`/block_sports?id=${id}`)
+    return resData
+}

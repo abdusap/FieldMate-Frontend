@@ -10,17 +10,17 @@ import HomeSectionProperty from '../../Components/Users/HomeServices'
 
 function Home() {
    const navigate=useNavigate()
-  useEffect(()=>{
-    const token=getAuthToken()
-    console.log(token)
-    if(token){
-      const data=decodeAuthToken()
-      console.log(data)
-    }
+  // useEffect(()=>{
+  //   const token=getAuthToken()
+  //   console.log(token)
+  //   if(token){
+  //     const data=decodeAuthToken()
+  //     console.log(data)
+  //   }
     // else(
     //  navigate('/login')
     // )
-  },[])
+  // },[])
   return (
     <>
     {/* <Navbar/> */}

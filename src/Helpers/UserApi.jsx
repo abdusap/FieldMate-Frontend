@@ -11,3 +11,8 @@ export const loginApi=async(data)=>{
    const resData=await UserBaseApi.post("/login",data)
    return resData
 }
+
+export const getLocationAndSportsApi=async()=>{
+   const resData=await UserBaseApi.get("/all_locaton_sports")
+   return resData
+}
