@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { availableLocationApi } from '../../Helpers/UserApi';
 
 function SlotDetailsForm() {
     const [minDate, setMinDate] = useState(new Date().toISOString().split('T')[0]);
+    // const [location,setLocation] = useState([])
+    useEffect(()=>{
+      availableLocationApi()
+    })
   return (
     <>
          <div className='bg-white w-fit p-10 mx-auto rounded-md'>
@@ -11,7 +16,7 @@ function SlotDetailsForm() {
                 <label for="first_name" class="block mb-2 mt-3 text-sm font-medium text-gray-900 ">Select Sports</label>
                 <select name="" id=""  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none block w-full p-2.5">
                     <option value="football">football</option>
-                    <option value="football">football</option>
+                    <option value="football">cricket</option>
                 </select>
                 </div>
                     <div>
@@ -33,43 +38,49 @@ function SlotDetailsForm() {
         <div className="grid grid-cols-3 gap-4">
         <div>
     <label htmlFor="slot3" className="block cursor-pointer">
-      <span className="bg-green p-1 ">Available</span>
+      <span className="bg-green p-1 ">03PM-04PM</span>
       <input type="radio" id="slot3" name="slot" value="slot3" className="" />
     </label>
   </div>
-  <div>
-    <label htmlFor="slot2" className="block cursor-pointer">
+  {/* <div> */}
+    {/* <label htmlFor="slot2" className="block cursor-pointer">
       <span className="bg-red p-1">Booked</span>
       <input type="radio" id="slot2" name="slot" value="slot2" className="appearance-none checked:bg-red-500" />
-    </label>
-  </div>
+    </label> */}
+  {/* </div> */}
   <div>
     <label htmlFor="slot3" className="block cursor-pointer">
-      <span className="bg-green p-1 checked:bg-blue-500">Available</span>
+      <span className="bg-green p-1">04PM-05PM</span>
       <input type="radio" id="slot3" name="slot" value="slot3" className="" />
     </label>
   </div>
   <div>
     <label htmlFor="slot3" className="block cursor-pointer">
-      <span className="bg-green p-1">Available</span>
+      <span className="bg-green p-1">05PM-06PM</span>
       <input type="radio" id="slot3" name="slot" value="slot3" className="" />
     </label>
   </div>
   <div>
     <label htmlFor="slot3" className="block cursor-pointer">
-      <span className="bg-green p-1">Available</span>
+      <span className="bg-green p-1">06PM-07PM</span>
       <input type="radio" id="slot3" name="slot" value="slot3" className="" />
     </label>
   </div>
   <div>
     <label htmlFor="slot3" className="block cursor-pointer">
-      <span className="bg-green p-1">Available</span>
+      <span className="bg-green p-1">07PM-08PM</span>
       <input type="radio" id="slot3" name="slot" value="slot3" className="" />
     </label>
   </div>
   <div>
     <label htmlFor="slot3" className="block cursor-pointer">
-      <span className="bg-green p-1">Available</span>
+      <span className="bg-green p-1">08PM-09PM</span>
+      <input type="radio" id="slot3" name="slot" value="slot3" className="" />
+    </label>
+  </div>
+  <div>
+    <label htmlFor="slot3" className="block cursor-pointer">
+      <span className="bg-green p-1">09PM-10PM</span>
       <input type="radio" id="slot3" name="slot" value="slot3" className="" />
     </label>
   </div>

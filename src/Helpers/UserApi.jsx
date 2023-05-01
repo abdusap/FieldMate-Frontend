@@ -16,3 +16,18 @@ export const getLocationAndSportsApi=async()=>{
    const resData=await UserBaseApi.get("/all_locaton_sports")
    return resData
 }
+
+export const getAllTurfApi=async()=>{
+   const resData=await UserBaseApi.get("/all_turf")
+   return resData
+}
+
+export const turfDetailsApi=async(id)=>{
+   const resData=await UserBaseApi.get(`/turf_details?id=${id}`)
+   return resData
+}
+
+export const availableLocationApi=async()=>{
+   const resData=await UserBaseApi.get("/available_location")
+   return resData
+}

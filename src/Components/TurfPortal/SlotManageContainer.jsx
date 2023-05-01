@@ -21,7 +21,7 @@ function SlotManageContainer() {
 // }
   return (
     <>
-    <h1 className="font-bold text-xl md:text-2xl">Turf Datails</h1>
+    <h1 className="font-bold text-xl md:text-2xl">Slot Manage</h1>
              <div className=' justify-center items-center  w-full px-10'>
                 <div className='flex justify-end'>
                 <button onClick={()=>setModal(!modal)} className='text-base bg-blue-500 p-1 rounded-lg text-white mr-4'>Add Slots</button>

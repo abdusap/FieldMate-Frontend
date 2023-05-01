@@ -47,7 +47,7 @@ function LocationAndSports() {
                   showConfirmButton: false,
                   timer: 1500
                 }).then(()=>{
-                  setUpdated(!updated)
+                  setUpdated(()=>!updated)
                 })
               }
             })
@@ -85,7 +85,7 @@ function LocationAndSports() {
                   showConfirmButton: false,
                   timer: 1500
                 }).then(()=>{
-                  setUpdated(!updated)
+                  setUpdated(()=>!updated)
                 })
               }
             })
@@ -118,12 +118,12 @@ function LocationAndSports() {
 
      const blockLocation=(id)=>{
       ConfirmSwal(blockLocationApi,id).then(()=>{
-        setUpdated(!updated)
+        setUpdated(()=>!updated)
       })
      }
      const blockSports=(id)=>{
       ConfirmSwal(blockSportsApi,id).then(()=>{
-        setUpdated(!updated)
+        setUpdated(()=>!updated)
       })
      }
 

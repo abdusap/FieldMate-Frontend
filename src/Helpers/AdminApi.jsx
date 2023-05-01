@@ -64,3 +64,23 @@ export const blockSportsApi=async(id)=>{
     const resData=await AdminApi.patch(`/block_sports?id=${id}`)
     return resData
 }
+
+export const getAllUserApi=async()=>{
+    const resData=await AdminApi.get('/all_user')
+    return resData
+}
+
+export const getAllTurfApi=async()=>{
+    const resData=await AdminApi.post('/all_turf')
+    return resData
+}
+
+export const blockUserApi=async(id)=>{
+    const resData=await AdminApi.patch(`/block_user?id=${id}`)
+    return resData
+}
+
+export const blockTurfApi=async(id)=>{
+    const resData=await AdminApi.patch(`/block_turf?id=${id}`)
+    return resData
+}

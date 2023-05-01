@@ -10,6 +10,7 @@ import TurfDetails from '../Pages/User/TurfDetails'
 import SlotDetails from '../Pages/User/SlotDetails'
 // import Login from '../Pages/User/Login'
 // import User from '../Pages/User/Login/User'
+import { Context } from '../Context/SearchContext'
 
 
 
@@ -29,11 +30,10 @@ function UserRoute() {
 
   // },[])
   return (
+      <Context>
     <Routes>
         <Route path='/' element={<UserHomeLayout/>}>
-    
-
-          <Route path='' element={<Home/>}></Route>
+        <Route path='' element={<Home/>}></Route>
 
         <Route path='turf_listing' element={<TurfListing/>}></Route>
         <Route path='turf_details' element={<TurfDetails/>}></Route>
@@ -43,6 +43,7 @@ function UserRoute() {
         <Route path='/signup' element={<Signup/>}></Route>
         <Route path='/*' element={'Not found'}></Route>
     </Routes>
+        </Context>
   )
 }
 

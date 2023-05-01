@@ -140,7 +140,7 @@ function Navbar() {
 
             {expand && <span className="text-white ">Reviews</span>}
           </span>
-          <span className="text-white flex gap-1 mt-6">
+          {/* <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -157,7 +157,7 @@ function Navbar() {
             </svg>
 
             {expand && <span className="text-white ">Offers</span>}
-          </span>
+          </span> */}
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"

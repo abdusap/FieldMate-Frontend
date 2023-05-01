@@ -55,7 +55,12 @@ function Sidebar() {
               {expand && <span className="text-white ">Dashboard</span>}
             </span>
           </NavLink>
-
+          <NavLink
+            to="user-manage"
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -74,6 +79,13 @@ function Sidebar() {
 
             {expand && <span className="text-white ">User Manage</span>}
           </span>
+          </NavLink>
+          <NavLink
+            to="turf-manage"
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +104,7 @@ function Sidebar() {
 
             {expand && <span className="text-white ">Turf Manage</span>}
           </span>
+          </NavLink>
           <NavLink
             to="turf-verify"
             className={({ isActive }) =>

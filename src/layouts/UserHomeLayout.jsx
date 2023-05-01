@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function UserHomeLayout() {
+  const navigate=useNavigate()
   const [isMobile, setIsMobile] = useState(false);
   const [toggle, setToggle] = useState(false);
   console.log(isMobile);
@@ -106,13 +107,13 @@ function UserHomeLayout() {
           )}
           { <>
           <div className="">
-            <button>Cricket</button>
+            <button onClick={()=>navigate('/turf_listing')}>Cricket</button>
           </div>
           <div>
-            <button>Football</button>
+            <button onClick={()=>navigate('/turf_listing')}>Football</button>
           </div>
           <div>
-            <button>Badminton</button>
+            <button onClick={()=>navigate('/turf_listing')}>Badminton</button>
           </div>
           </>}
           {isMobile && toggle && (
