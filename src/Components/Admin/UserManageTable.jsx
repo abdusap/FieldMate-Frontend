@@ -13,7 +13,7 @@ useEffect(()=>{
     })
 },[update])
     const handleList=(id)=>{
-      ConfirmSwal(blockUserApi,id).then((res)=>{
+      ConfirmSwal(blockUserApi,id,()=>setUpdate(!update)).then((res)=>{
           setUpdate(()=>!update)
         
       })

@@ -11,6 +11,8 @@ import SlotDetails from '../Pages/User/SlotDetails'
 // import Login from '../Pages/User/Login'
 // import User from '../Pages/User/Login/User'
 import { Context } from '../Context/SearchContext'
+import SlotCheckout from '../Pages/User/SlotCheckout'
+import Success from '../Pages/User/Success'
 
 
 
@@ -38,6 +40,8 @@ function UserRoute() {
         <Route path='turf_listing' element={<TurfListing/>}></Route>
         <Route path='turf_details' element={<TurfDetails/>}></Route>
         <Route path='slot_details' element={<SlotDetails/>}></Route>
+        <Route path='slot_checkout' element={<SlotCheckout/>}></Route>
+        <Route path='success' element={<Success/>}></Route>
         </Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>

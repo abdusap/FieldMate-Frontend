@@ -12,10 +12,9 @@ useEffect(()=>{
     })
 },[update])
     const handleList=(id)=>{
-      ConfirmSwal(blockTurfApi,id).then((res)=>{
-        setUpdate(()=>!update)
+      ConfirmSwal(blockTurfApi,id,()=>setUpdate(!update))
       
-    })
+  
     }
 
 

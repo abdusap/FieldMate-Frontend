@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+// import {userSlic}
+// useSelector()
 
 function UserHomeLayout() {
+  // const [user,setUser] = useState({})
+  const {id,name} = useSelector(state => state.user);
+  // setUser(existUser)
+  // console.log(useSelector(state => state.user));
   const navigate=useNavigate()
   const [isMobile, setIsMobile] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -58,13 +65,22 @@ function UserHomeLayout() {
                   type="text"
                   placeholder="Search"
                 />
+                <button className="bg-gray-700 text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2 ml-2">Submit</button>
               </form>
             </div>
           )}
           <div className="self-center flex md:flex-row p-2 md:p-5">
-            <button className="bg-white text-black p-1 font-semibold rounded-full border md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
-              Calicut
-            </button>
+            {/* <button className="bg-white text-black p-1 font-semibold rounded-full border md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
+              {name}
+            </button> */}
+            {name!==''&&
+              <div className="flex cursor-pointer bg-white text-black p-1 font-semibold rounded-full border-2 border-gray-400 md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+</svg><span className=''>{name}</span>
+            </div>
+            
+            }
             {isMobile ? (
               <svg
                 onClick={() => handleNav()}
@@ -82,11 +98,17 @@ function UserHomeLayout() {
                 />
               </svg>
             ) : (
-              <Link to="/login">
-                <button className="bg-black text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2">
+              
+                (id==='' &&
+
+                  <Link to="/login">
+                  <button className="bg-black text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2">
                   SignIn
-                </button>
-              </Link>
+                  </button>
+                  </Link>
+            )
+              
+              
             )}
           </div>
         </div>
@@ -116,7 +138,7 @@ function UserHomeLayout() {
             <button onClick={()=>navigate('/turf_listing')}>Badminton</button>
           </div>
           </>}
-          {isMobile && toggle && (
+          {isMobile && toggle && id==="" &&(
             <div>
               <button className="font-semibold">Login/Signup</button>
             </div>
@@ -133,7 +155,7 @@ function UserHomeLayout() {
               <img className="w-16" src="/image/logo only.png" alt="" />
             </span>
             <span className="text-white font-bold text-xl self-center">
-              FeildMate
+              FieldMate
             </span>
             <span className="text-white self-end text-sm">Find Your Field</span>
           </div>

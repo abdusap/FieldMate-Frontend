@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 
-function ConfirmSwal(api,id) {
+function ConfirmSwal(api,id,changeUpdate) {
   return (
 Swal.fire({
   title: 'Are you sure?',
@@ -12,7 +12,7 @@ Swal.fire({
   confirmButtonText: 'Yes'
 }).then((result) => {
   if (result.isConfirmed) {
-    api(id).then((res)=>{
+    api(id,changeUpdate).then((res)=>{
       if(res.data.success){     
       Swal.fire({
                 position: 'center',

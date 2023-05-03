@@ -75,12 +75,15 @@ export const getAllTurfApi=async()=>{
     return resData
 }
 
-export const blockUserApi=async(id)=>{
+export const blockUserApi=async(id,changeUpdate)=>{
     const resData=await AdminApi.patch(`/block_user?id=${id}`)
+    changeUpdate()
     return resData
 }
 
-export const blockTurfApi=async(id)=>{
+export const blockTurfApi=async(id,changeUpdate)=>{
     const resData=await AdminApi.patch(`/block_turf?id=${id}`)
+    changeUpdate()
+
     return resData
 }

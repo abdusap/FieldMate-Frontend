@@ -31,18 +31,18 @@ export const Slots=[
 //   "10PM-11PM",
 // ];
 
-// const currentTime = new Date();
+const currentTime = new Date();
 
-// const availableSlots = slotsArray.filter((slot) => {
-//   const [startTime, endTime] = slot.split("-");
-//   const [startHour, startMinute] = startTime.split("PM")[0].split(":");
-//   const [endHour, endMinute] = endTime.split("PM")[0].split(":");
-//   const start = new Date(currentTime);
-//   start.setHours(parseInt(startHour) + 12, parseInt(startMinute), 0, 0);
-//   const end = new Date(currentTime);
-//   end.setHours(parseInt(endHour) + 12, parseInt(endMinute), 0, 0);
-//   return currentTime < end;
-// });
+const availableSlots = slotsArray.filter((slot) => {
+  const [startTime, endTime] = slot.split("-");
+  const [startHour, startMinute] = startTime.split("PM")[0].split(":");
+  const [endHour, endMinute] = endTime.split("PM")[0].split(":");
+  const start = new Date(currentTime);
+  start.setHours(parseInt(startHour) + 12, parseInt(startMinute), 0, 0);
+  const end = new Date(currentTime);
+  end.setHours(parseInt(endHour) + 12, parseInt(endMinute), 0, 0);
+  return currentTime < end;
+});
 
 // const Slots = () => {
 //   return (
