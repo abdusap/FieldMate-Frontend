@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { removeUser } from "../Store/Slice/UserSlice";
 // import {userSlic}
 // useSelector()
 
 function UserHomeLayout() {
-  // const [user,setUser] = useState({})
-  const {id,name} = useSelector(state => state.user);
-  // setUser(existUser)
-  // console.log(useSelector(state => state.user));
   const navigate=useNavigate()
+  const dispatch=useDispatch()
+  const {id,name} = useSelector(state => state.user);
+  const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [toggle, setToggle] = useState(false);
-  console.log(isMobile);
-  console.log(toggle);
   function handleNav() {
     setToggle(() => !toggle);
   }
-  console.log(toggle);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+const handleLogout=()=>{
+  localStorage.removeItem('user')
+  dispatch(removeUser(''))
+  navigate('/')
+}
+
   useEffect(() => {
     function handleResize() {
       setIsMobile(window.innerWidth < 768);
@@ -74,11 +81,70 @@ function UserHomeLayout() {
               {name}
             </button> */}
             {name!==''&&
-              <div className="flex cursor-pointer bg-white text-black p-1 font-semibold rounded-full border-2 border-gray-400 md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-</svg><span className=''>{name}</span>
-            </div>
+//               <div className="flex cursor-pointer bg-white text-black p-1 font-semibold rounded-full border-2 border-gray-400 md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
+//             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+//   <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+// </svg><span className=''>{name}</span>
+//             </div>
+<>
+{/* <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+<div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+      <li>
+<p>dd</p>      </li>
+     
+    </ul>
+</div> */}
+<div className="relative inline-block text-left">
+      <button
+        type="button"
+        onClick={toggleDropdown}
+        className="flex cursor-pointer bg-white text-black p-1 font-semibold rounded-full border-2 border-gray-400 md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2"
+      >
+        {name}
+        <svg
+          className={`w-4 h-4 ml-2 mt-1 transition-transform transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      {isOpen && (
+        <div
+          className="z-10 absolute border right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow "
+          onClick={toggleDropdown}
+        >
+          <ul className="py-2 px-2 text-base md:text-lg text-black shadow-2xl">
+            <li className="cursor-pointer border-b border-gray-400">
+              {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                Dashboard
+              </a> */}
+              <p>Profile</p>
+            </li>
+            <li className="cursor-pointer border-b border-gray-400">
+              {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                Settings
+              </a> */}
+              <p>Booking</p>
+            </li>
+            <li className="cursor-pointer border-b border-gray-400">
+              {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                Earnings
+              </a> */}
+              <p onClick={handleLogout}>Logout</p>
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
+</>
+
             
             }
             {isMobile ? (

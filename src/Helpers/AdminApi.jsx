@@ -87,3 +87,8 @@ export const blockTurfApi=async(id,changeUpdate)=>{
 
     return resData
 }
+
+export const dashboardDetailsApi=async()=>{
+    const resData=await AdminApi.get('/dashboard_details')
+    return resData
+}

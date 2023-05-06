@@ -198,7 +198,7 @@ async function displayRazorpay(total) {
 
 </div>
 <div className='w-1/2'>
-<label for="first_name" class="block mb-1 mt-2 text-sm font-medium text-gray-900 ">{location.state.date}</label>
+<label for="first_name" class="block mb-1 mt-2 text-sm font-medium text-gray-900 ">{new Date(location.state.date).toLocaleDateString('en-GB')}</label>
 
 </div>
 </div>

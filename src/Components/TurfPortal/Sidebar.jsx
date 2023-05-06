@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { removeTurfId } from "../../Store/Slice/TurfIdSlice";
+
+
 
 function Navbar() {
   const [expand, setExpand] = useState(false);
@@ -7,6 +11,14 @@ function Navbar() {
     setExpand((expand) => !expand);
   }
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
+  const handleLogout=()=>{
+    dispatch(removeTurfId())
+    localStorage.removeItem('turf')
+    navigate('/turf/login')
+  }
   return (
     <>
       <div className="flex bg-black h-auto  p-3 md:p-5 flex-col w-fit ">
@@ -121,7 +133,11 @@ function Navbar() {
 
             {expand && <span className="text-white ">Tournament</span>}
           </span>
-
+          <NavLink 
+          to={"review"}
+          className={({ isActive }) =>
+          isActive ? "text-red-600" : "text-white"
+        }>
           <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -140,6 +156,7 @@ function Navbar() {
 
             {expand && <span className="text-white ">Reviews</span>}
           </span>
+          </NavLink>
           {/* <span className="text-white flex gap-1 mt-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +183,9 @@ function Navbar() {
               strokeWidth={1.5}
               stroke="currentColor"
               className="w-6 h-6 text-white"
+              onClick={handleLogout}
             >
+              <title>Logout</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

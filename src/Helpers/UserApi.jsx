@@ -56,3 +56,8 @@ export const bookSlotApi=async(data)=>{
    const resData=await UserBaseApi.post('/book_slot',data)
    return resData
 }
+
+export const addReviewApi=async(data)=>{
+   const resData=await UserBaseApi.post('/add_review',data)
+   return resData
+}

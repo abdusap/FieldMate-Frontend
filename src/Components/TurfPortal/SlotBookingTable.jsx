@@ -1,103 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DataTable from "react-data-table-component";
+import { cancelSlotApi, getSlotBookingApi } from '../../Helpers/TurfApi,';
+import { useSelector } from 'react-redux';
+import ConfirmSwal from '../../Helpers/ConfirmSwal';
 
-function SlotBookingTable() {
+function SlotBookingTable({detailModal,setdetailsModal,setSlotId}) {
+  const {id}=useSelector((state)=>state.turf)
+  const [booking,setBooking]=useState([])
+  const [update,setUpdate]=useState(true)
+  useEffect(()=>{
+    getSlotBookingApi(id).then((res)=>{
+      console.log(res);
+      setBooking(res.data.details)
+    })
+  },[update])
 
     const handleList=(id)=>{
+      setSlotId(id)
+      setdetailsModal(!detailModal)
         console.log(id)
     }
-const user=[
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:false},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:false},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:false},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:false},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:false},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:true},
-    {_id:'987879dufidsfi',
-    name:'akdk',
-email:'dkjkdfk',
-mobile:46546551,
-status:false},
-]
+    const handleCancel=(id)=>{
+      console.log(id)
+      ConfirmSwal(cancelSlotApi,id,()=>setUpdate(!update)).then((res)=>{
+       setUpdate(!update)
+      })
+    }
+
 
     const columns = [
         {
@@ -109,32 +38,45 @@ status:false},
           selector: (row) => row.name,
         },
         {
-          name: "Email",
-          selector: (row) => row.email,
-        },
-        {
           name: "Mobile No:",
           selector: (row) => row.mobile,
         },
         {
+          name: "Date",
+          selector: (row) => row.date,
+        },
+        {
+          name: "Sports",
+          selector: (row) => row.sports,
+        },
+        {
+          name: "Slots",
+          selector: (row) =>(
+           <div>
+            {
+              row.slots.map((data)=>
+              <p className='my-1'>{data}</p>)
+            }
+           </div>
+          ) 
+        },
+        {
+          name: "Status",
+          selector: (row) => (
+            row.status?<p className='text-green-700 font-semibold'>Active</p>:<p className='text-red-700 font-semibold'>Cancelled</p>
+          )
+        },
+        {
           name: "Action",
           cell: (row) => (
-            // <button
-            //   className={`${
-            //     row.status ? "bg-green-500" : "bg-red-500"
-            //   } rounded text-white font-medium w-20 h-7`}
-            //   onClick={() => {
-            //     handleList(row.id);
-            //   }}
-            // >
-            //   {row.status ? "UnBlock" : "Block"}
-            // </button>
-            <>{row.status ?
-
-                <button className='bg-red-500 font-medium w-20 h-7 rounded text-white'>Cancel</button>:
-                <p className='text-red-700 pr-2 ml-2'>Cancelled</p>
+            <>{row.status &&
+                <svg onClick={()=>handleCancel(row.id)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-600 cursor-pointer">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
             }
-            <button className='bg-blue-500 font-medium w-20 h-7 rounded text-white ml-2'>view</button>
+<svg xmlns="http://www.w3.org/2000/svg" onClick={()=>handleList(row.id)} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer ml-3">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3.75H6A2.25 2.25 0 003.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0120.25 6v1.5m0 9V18A2.25 2.25 0 0118 20.25h-1.5m-9 0H6A2.25 2.25 0 013.75 18v-1.5M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+</svg>
             </>
           ),
         },
@@ -158,13 +100,15 @@ status:false},
         },
       };
 
-      const tableData = user.map((value, i) => {
+      const tableData = booking?.map((value, i) => {
         return {
           id: value._id,
           no: i + 1,
           name: value.name,
-          email: value.email,
           mobile: value.mobile,
+          date:new Date(value.date).toLocaleDateString('en-GB'),
+          sports:value.sports,
+          slots:value.slots,
           status: value.status,
         };
       });

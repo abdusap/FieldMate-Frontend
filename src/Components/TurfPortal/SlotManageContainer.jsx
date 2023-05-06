@@ -1,35 +1,26 @@
 import React, { useState } from 'react'
 import SlotBookingTable from './SlotBookingTable'
 import AddSlotModal from './AddSlotModal'
+import SlotDetailsModal from './SlotDetailsModal'
 
 
 function SlotManageContainer() {
   const [modal,setModal]=useState(false)
-//   const HandleSubmit=(e)=>{
-//     e.preventDefault()
-//     const slots=[]
-//     for(let i=1;i<e.target.length-1;i++){
-//         if (e.target[i].value !== "") {
-//             slots.push(e.target[i].value)
-//         }
+  const [detailsModal,setdetailsModal]=useState(false)
+  const [slotId,setSlotId]=useState('')
 
-//     }
-//     const slotPrice=e.target[0].value
-//     console.log(slots);
-//     console.log(slotPrice);
-  
-// }
+
   return (
     <>
     <h1 className="font-bold text-xl md:text-2xl">Slot Manage</h1>
              <div className=' justify-center items-center  w-full px-10'>
                 <div className='flex justify-end'>
-                <button onClick={()=>setModal(!modal)} className='text-base bg-blue-500 p-1 rounded-lg text-white mr-4'>Add Slots</button>
-                <button className='text-base bg-blue-500 p-1 rounded-lg text-white '>Add Booking</button>
+                <button onClick={()=>setModal(!modal)} className='text-base bg-blue-500 mb-2 p-1 rounded-lg text-white mr-4'>Add Slots</button>
                 </div>
-             <SlotBookingTable/>
+             <SlotBookingTable detailModal={detailsModal} setdetailsModal={setdetailsModal} setSlotId={setSlotId}/>
              </div>
             {modal && <AddSlotModal title={"Add Slot"} modal={modal} setModal={setModal} />}
+            {detailsModal && <SlotDetailsModal modal={detailsModal} setModal={setdetailsModal} slotId={slotId} setSlotId={setSlotId}/>}
       </>
   )
 }

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const navigate=useNavigate()
   const [expand, setExpand] = useState(false);
   function toggleHandler() {
     setExpand((expand) => !expand);
   }
-
+const handleLogout=()=>{
+localStorage.removeItem('admin')
+navigate('/admin/login')
+}
   return (
     <>
       <div className="flex bg-black h-screen  p-3 md:p-5 flex-col w-fit ">
@@ -186,7 +190,9 @@ function Sidebar() {
               strokeWidth={1.5}
               stroke="currentColor"
               className="w-6 h-6 text-white"
+              onClick={handleLogout}
             >
+              <title>Logout</title>
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

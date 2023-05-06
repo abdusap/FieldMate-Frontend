@@ -7,6 +7,7 @@ import Signup from "../Pages/TurfPortal/Signup";
 import Details from "../Pages/TurfPortal/Details";
 import SlotManage from "../Pages/TurfPortal/SlotManage";
 import ProtectedRoute from "../Helpers/ProtectedRoute";
+import ReviewContainer from "../Components/TurfPortal/ReviewContainer";
 
 
 
@@ -29,10 +30,10 @@ function TurfRoute() {
           path="slots"
           element={<SlotManage/>}
         ></Route>
-        {/* <Route
-          path="add_slots"
-          element={<AddSlots/>}
-        ></Route> */}
+        <Route
+          path="review"
+          element={<ReviewContainer/>}
+        ></Route>
       </Route>
       </Route>
       <Route

@@ -56,13 +56,6 @@ useEffect(()=>{
             >
               {row.status ? "Block" : "UnBlock"}
             </button>
-            // <>{row.status ?
-
-            //     <button className='bg-red-500 font-medium w-20 h-7 rounded text-white '>block</button>:
-            //     <p className='text-red-700 pr-2 ml-2'>Cancelled</p>
-            // }
-            // <button className='bg-blue-500 font-medium w-20 h-7 rounded text-white ml-2'>view</button>
-            // </>
           ),
         },
       ];
@@ -98,10 +91,8 @@ useEffect(()=>{
 
   return (
     <>
-{/* <div className="sm:w-full px-10"> */}
         <DataTable columns={columns} data={tableData} customStyles={style} pagination
     />
-      {/* </div> */}
     </>
   )
 }

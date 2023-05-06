@@ -13,7 +13,9 @@ const userSlice=createSlice({
             state.name = name;
         },
         removeUser(state,action){
-            return {}
+            return {
+                id:'',
+                name:''}
         }
     }
        

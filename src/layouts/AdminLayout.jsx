@@ -1,9 +1,14 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../Components/Admin/Sidebar";
 
 
 function AdminLayout() {
+  const navigate=useNavigate()
+  const handleLogout=()=>{
+    localStorage.removeItem('admin')
+    navigate('/admin/login')
+  }
   return (
     <div className="flex ">
       <Sidebar />
@@ -16,8 +21,10 @@ function AdminLayout() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 text-white"
+            className="w-6 h-6 text-white cursor-pointer"
+            onClick={handleLogout}
           >
+            <title>Logout</title>
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
