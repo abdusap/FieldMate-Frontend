@@ -82,3 +82,13 @@ export const profileDetailsApi=async(id)=>{
    const resData=await UserBaseApi.get(`/profile?id=${id}`)
    return resData
 }
+
+export const profileUpdateApi=async(data)=>{
+   const resData=await UserBaseApi.post('/profile',data)
+   return resData
+}
+
+export const profileimageApi=async(data)=>{
+   const resData=await UserBaseApi.post('/profile_image',data)
+   return resData
+}
