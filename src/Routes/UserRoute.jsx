@@ -13,6 +13,9 @@ import SlotDetails from '../Pages/User/SlotDetails'
 import { Context } from '../Context/SearchContext'
 import SlotCheckout from '../Pages/User/SlotCheckout'
 import Success from '../Pages/User/Success'
+import Profile from '../Pages/User/Profile'
+import Booking from '../Pages/User/Booking'
+import BookingDetails from '../Pages/User/BookingDetails'
 
 
 
@@ -42,6 +45,9 @@ function UserRoute() {
         <Route path='slot_details' element={<SlotDetails/>}></Route>
         <Route path='slot_checkout' element={<SlotCheckout/>}></Route>
         <Route path='success' element={<Success/>}></Route>
+        <Route path='profile' element={<Profile/>}></Route>
+        <Route path='Booking' element={<Booking/>}></Route>
+        <Route path='Booking_details' element={<BookingDetails/>}></Route>
         </Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/signup' element={<Signup/>}></Route>

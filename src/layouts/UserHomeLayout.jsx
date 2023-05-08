@@ -1,17 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { removeUser } from "../Store/Slice/UserSlice";
+import { SearchContext } from "../Context/SearchContext";
+import { getAllSports } from "../Helpers/UserApi";
 // import {userSlic}
 // useSelector()
 
 function UserHomeLayout() {
   const navigate=useNavigate()
   const dispatch=useDispatch()
+  const {search,setSearch}=useContext(SearchContext)
   const {id,name} = useSelector(state => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [sports,setSports] = useState([])
+  useEffect(()=>{
+    getAllSports().then((res)=>{
+      setSports(res.data.sports)
+    })
+  },[])
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    console.log(search)
+  }
+  
+  
   function handleNav() {
     setToggle(() => !toggle);
   }
@@ -66,13 +81,14 @@ const handleLogout=()=>{
           {/* </div> */}
           {!isMobile && (
             <div className="self-center ">
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <input
                   className="w- border rounded-2xl h-8 w-72 focus:outline-none focus:border-gray-600 pl-3"
                   type="text"
                   placeholder="Search"
+                  onChange={(e)=>setSearch(e.target.value)}
                 />
-                <button className="bg-gray-700 text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2 ml-2">Submit</button>
+                <button type="submit" className="bg-gray-700 text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2 ml-2">Submit</button>
               </form>
             </div>
           )}
@@ -125,19 +141,19 @@ const handleLogout=()=>{
               {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 Dashboard
               </a> */}
-              <p>Profile</p>
+              <p onClick={()=>navigate('/profile')}>Profile</p>
             </li>
             <li className="cursor-pointer border-b border-gray-400">
               {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 Settings
               </a> */}
-              <p>Booking</p>
+              <p onClick={()=>navigate('/booking')}>Booking</p>
             </li>
             <li className="cursor-pointer border-b border-gray-400">
               {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                 Earnings
               </a> */}
-              <p onClick={handleLogout}>Logout</p>
+              <p className="text-red-700" onClick={handleLogout}>Logout</p>
             </li>
           </ul>
         </div>
@@ -187,22 +203,28 @@ const handleLogout=()=>{
           {/* <h1>hahf</h1> */}
           {isMobile && toggle && (
             <div className="pt-3">
-              <input type="text" className="border  focus:outline-none" />
-              <button className="bg-black text-white pr-2 pl-2 ml-2 rounded-md ">
+              <form onSubmit={handleSubmit}>
+
+              <input type="text" className="border  focus:outline-none"  onChange={(e)=>setSearch(e.target.value)}/>
+              <button type="submit" className="bg-black text-white pr-2 pl-2 ml-2 rounded-md ">
                 Search
               </button>
+              </form>
             </div>
           )}
           { <>
-          <div className="">
-            <button onClick={()=>navigate('/turf_listing')}>Cricket</button>
+          {sports?.map((data)=>
+     <div className="">
+            <button onClick={()=>navigate('/turf_listing',{state:data.name})}>{data.name}</button>
           </div>
-          <div>
+              )
+          }
+          {/* <div>
             <button onClick={()=>navigate('/turf_listing')}>Football</button>
           </div>
           <div>
             <button onClick={()=>navigate('/turf_listing')}>Badminton</button>
-          </div>
+          </div> */}
           </>}
           {isMobile && toggle && id==="" &&(
             <div>

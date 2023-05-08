@@ -1,36 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { slotDetailsApi } from "../../Helpers/TurfApi,";
+import React, { useEffect, useState } from 'react'
+import { slotDetailsApi } from '../../Helpers/TurfApi,'
+import { useLocation } from 'react-router-dom'
 
-
-
-function SlotDetailsModal({ modal, setModal ,slotId,setSlotId}) {
-    const [details,setDetails]=useState({})
+function BookingDetail() {
+    const [details,setDetails]=useState()
+    const id =useLocation((state)=>state)
     const [loader,setLoader]=useState(false)
-  useEffect(()=>{
-    if(slotId!==''){
-        slotDetailsApi(slotId).then((res)=>{
+    useEffect(()=>{
+        slotDetailsApi(id.state).then((res)=>{
             setDetails(res.data.details)
-            setSlotId('')
             setLoader(!loader)
         })
-    }
-
-  },[])
-
+    },[])
   return (
-    <>
-      <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-        <div className="bg-white p-2 rounded w-96 m-5">
+    <div className='flex justify-center'>
+         <div className="bg-white p-2 rounded w-96 m-5">
           <div className="flex justify-between">
             <h1 className="font-semibold text-center text-2xl px-5 my-5 text-gray-700">
-              Slot Details
+              Booking Details
             </h1>
-            <button
-              className="font-semibold mr-3 mb-8 text-xl"
-              onClick={() => setModal(!modal)}
-            >
-              X
-            </button>
+           
           </div>
           <div className="flex flex-col px-5">
             {loader ?
@@ -144,10 +133,8 @@ function SlotDetailsModal({ modal, setModal ,slotId,setSlotId}) {
 }
           </div>
         </div>
-        
-      </div>
-    </>
-  );
+    </div>
+  )
 }
 
-export default SlotDetailsModal;
+export default BookingDetail
