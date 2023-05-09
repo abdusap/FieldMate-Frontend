@@ -9,41 +9,21 @@ import SlotManage from "../Pages/TurfPortal/SlotManage";
 import ProtectedRoute from "../Helpers/ProtectedRoute";
 import ReviewContainer from "../Components/TurfPortal/ReviewContainer";
 
-
-
-
 function TurfRoute() {
   return (
     <Routes>
-     
-      <Route  element={<ProtectedRoute type={'turf'} redirect={'/turf/login'} />}>
-      <Route path="/" element={<TurfLayout/>}>
-        <Route
-          path="dashboard"
-          element={<Dashboard/>}
-        ></Route>
-        <Route
-          path="details"
-          element={<Details/>}
-        ></Route>
-        <Route
-          path="slots"
-          element={<SlotManage/>}
-        ></Route>
-        <Route
-          path="review"
-          element={<ReviewContainer/>}
-        ></Route>
-      </Route>
-      </Route>
       <Route
-          path="/login"
-          element={<Login/>}
-        ></Route>
-        <Route
-          path="/signup"
-          element={<Signup/>}
-        ></Route>
+        element={<ProtectedRoute type={"turf"} redirect={"/turf/login"} />}
+      >
+        <Route path="/" element={<TurfLayout />}>
+          <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="details" element={<Details />}></Route>
+          <Route path="slots" element={<SlotManage />}></Route>
+          <Route path="review" element={<ReviewContainer />}></Route>
+        </Route>
+      </Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/signup" element={<Signup />}></Route>
     </Routes>
   );
 }

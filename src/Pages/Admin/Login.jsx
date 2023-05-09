@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom'
 
 function Login() {
   const token=localStorage.getItem('admin')
-  // 
+  
   return token?(<Navigate to={'/admin/dashboard'}/>): (
     <>
     <LoginSignupContainer Form={<LoginForm/>}/>

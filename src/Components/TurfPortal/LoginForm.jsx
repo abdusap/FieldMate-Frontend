@@ -5,8 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginApi } from "../../Helpers/TurfApi,";
 import { setTurfToken } from "../../Authentication/StoreAuthToken";
-import setAuthToken from "../../Authentication/SetAuthToken";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTurfId } from "../../Store/Slice/TurfIdSlice";
 
 

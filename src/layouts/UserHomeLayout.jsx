@@ -8,25 +8,24 @@ import { getAllSports } from "../Helpers/UserApi";
 // useSelector()
 
 function UserHomeLayout() {
-  const navigate=useNavigate()
-  const dispatch=useDispatch()
-  const {search,setSearch}=useContext(SearchContext)
-  const {id,name} = useSelector(state => state.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { search, setSearch } = useContext(SearchContext);
+  const { id, name } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [sports,setSports] = useState([])
-  useEffect(()=>{
-    getAllSports().then((res)=>{
-      setSports(res.data.sports)
-    })
-  },[])
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-    console.log(search)
-  }
-  
-  
+  const [sports, setSports] = useState([]);
+  useEffect(() => {
+    getAllSports().then((res) => {
+      setSports(res.data.sports);
+    });
+  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(search);
+  };
+
   function handleNav() {
     setToggle(() => !toggle);
   }
@@ -34,16 +33,16 @@ function UserHomeLayout() {
     setIsOpen(!isOpen);
   };
 
-const handleLogout=()=>{
-  localStorage.removeItem('user')
-  dispatch(removeUser(''))
-  navigate('/')
-}
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    dispatch(removeUser(""));
+    navigate("/");
+  };
 
   useEffect(() => {
     function handleResize() {
       setIsMobile(window.innerWidth < 768);
-      setToggle(window.innerWidth > 768)
+      setToggle(window.innerWidth > 768);
     }
 
     // Add event listener to update isMobile on resize
@@ -67,18 +66,13 @@ const handleLogout=()=>{
           height: "100%",
           width: "100%",
           backgroundImage: "url(./image/homeBackground.png)",
-          //   backgroundAttachment: "fixed",
           backgroundSize: "cover",
           zIndex: "-1",
         }}
       ></div>
       <nav className="">
         <div className="flex justify-between flex-row w-full  bg-white p-1 md:pl-6 border-b-2 border-slate-200  ">
-          {/* <p>hai</p> */}
-          {/* <div> */}
-
           <img src="./image/logo.png" className="w-36 md:w-48 " alt="logo" />
-          {/* </div> */}
           {!isMobile && (
             <div className="self-center ">
               <form onSubmit={handleSubmit}>
@@ -86,83 +80,68 @@ const handleLogout=()=>{
                   className="w- border rounded-2xl h-8 w-72 focus:outline-none focus:border-gray-600 pl-3"
                   type="text"
                   placeholder="Search"
-                  onChange={(e)=>setSearch(e.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
-                <button type="submit" className="bg-gray-700 text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2 ml-2">Submit</button>
+                <button
+                  type="submit"
+                  className="bg-gray-700 text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2 ml-2"
+                >
+                  Submit
+                </button>
               </form>
             </div>
           )}
           <div className="self-center flex md:flex-row p-2 md:p-5">
-            {/* <button className="bg-white text-black p-1 font-semibold rounded-full border md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
-              {name}
-            </button> */}
-            {name!==''&&
-//               <div className="flex cursor-pointer bg-white text-black p-1 font-semibold rounded-full border-2 border-gray-400 md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2">
-//             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-//   <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-// </svg><span className=''>{name}</span>
-//             </div>
-<>
-{/* <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg className="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-<div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-      <li>
-<p>dd</p>      </li>
-     
-    </ul>
-</div> */}
-<div className="relative inline-block text-left">
-      <button
-        type="button"
-        onClick={toggleDropdown}
-        className="flex cursor-pointer bg-white text-black p-1 font-semibold rounded-full border-2 border-gray-400 md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2"
-      >
-        {name}
-        <svg
-          className={`w-4 h-4 ml-2 mt-1 transition-transform transform ${
-            isOpen ? "rotate-180" : ""
-          }`}
-          aria-hidden="true"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-        </svg>
-      </button>
-      {isOpen && (
-        <div
-          className="z-10 absolute border right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow "
-          onClick={toggleDropdown}
-        >
-          <ul className="py-2 px-2 text-base md:text-lg text-black shadow-2xl">
-            <li className="cursor-pointer border-b border-gray-400">
-              {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Dashboard
-              </a> */}
-              <p onClick={()=>navigate('/profile')}>Profile</p>
-            </li>
-            <li className="cursor-pointer border-b border-gray-400">
-              {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Settings
-              </a> */}
-              <p onClick={()=>navigate('/booking')}>Booking</p>
-            </li>
-            <li className="cursor-pointer border-b border-gray-400">
-              {/* <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                Earnings
-              </a> */}
-              <p className="text-red-700" onClick={handleLogout}>Logout</p>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
-</>
-
-            
-            }
+            {name !== "" && (
+              <>
+                <div className="relative inline-block text-left">
+                  <button
+                    type="button"
+                    onClick={toggleDropdown}
+                    className="flex cursor-pointer bg-white text-black p-1 font-semibold rounded-full border-2 border-gray-400 md:pr-3 md:pl-3 pl-2 pr-2 md:mr-4 mr-2"
+                  >
+                    {name}
+                    <svg
+                      className={`w-4 h-4 ml-2 mt-1 transition-transform transform ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                      aria-hidden="true"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      ></path>
+                    </svg>
+                  </button>
+                  {isOpen && (
+                    <div
+                      className="z-10 absolute border right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow "
+                      onClick={toggleDropdown}
+                    >
+                      <ul className="py-2 px-2 text-base md:text-lg text-black shadow-2xl">
+                        <li className="cursor-pointer border-b border-gray-400">
+                          <p onClick={() => navigate("/profile")}>Profile</p>
+                        </li>
+                        <li className="cursor-pointer border-b border-gray-400">
+                          <p onClick={() => navigate("/booking")}>Booking</p>
+                        </li>
+                        <li className="cursor-pointer border-b border-gray-400">
+                          <p className="text-red-700" onClick={handleLogout}>
+                            Logout
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
             {isMobile ? (
               <svg
                 onClick={() => handleNav()}
@@ -180,59 +159,61 @@ const handleLogout=()=>{
                 />
               </svg>
             ) : (
-              
-                (id==='' &&
-
-                  <Link to="/login">
+              id === "" && (
+                <Link to="/login">
                   <button className="bg-black text-white p-1 font-semibold rounded-full md:pr-3 md:pl-3 pl-2 pr-2">
-                  SignIn
+                    SignIn
                   </button>
-                  </Link>
-            )
-              
-              
+                </Link>
+              )
             )}
           </div>
         </div>
-        { toggle &&
-        <div
-          className={`flex bg-white md:flex-row ${
-            toggle && "flex-col"
-          } gap-3 md:gap-10  md:p-3  pl-5 md:pl-10 text-black`}
-        >
-          {/* <h1>hahf</h1> */}
-          {isMobile && toggle && (
-            <div className="pt-3">
-              <form onSubmit={handleSubmit}>
-
-              <input type="text" className="border  focus:outline-none"  onChange={(e)=>setSearch(e.target.value)}/>
-              <button type="submit" className="bg-black text-white pr-2 pl-2 ml-2 rounded-md ">
-                Search
-              </button>
-              </form>
-            </div>
-          )}
-          { <>
-          {sports?.map((data)=>
-     <div className="">
-            <button onClick={()=>navigate('/turf_listing',{state:data.name})}>{data.name}</button>
+        {toggle && (
+          <div
+            className={`flex bg-white md:flex-row ${
+              toggle && "flex-col"
+            } gap-3 md:gap-10  md:p-3  pl-5 md:pl-10 text-black`}
+          >
+            {isMobile && toggle && (
+              <div className="pt-3">
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    className="border  focus:outline-none"
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className="bg-black text-white pr-2 pl-2 ml-2 rounded-md "
+                  >
+                    Search
+                  </button>
+                </form>
+              </div>
+            )}
+            {
+              <>
+                {sports?.map((data) => (
+                  <div className="">
+                    <button
+                      onClick={() =>
+                        navigate("/turf_listing", { state: data.name })
+                      }
+                    >
+                      {data.name}
+                    </button>
+                  </div>
+                ))}
+              </>
+            }
+            {isMobile && toggle && id === "" && (
+              <div>
+                <button className="font-semibold">Login/Signup</button>
+              </div>
+            )}
           </div>
-              )
-          }
-          {/* <div>
-            <button onClick={()=>navigate('/turf_listing')}>Football</button>
-          </div>
-          <div>
-            <button onClick={()=>navigate('/turf_listing')}>Badminton</button>
-          </div> */}
-          </>}
-          {isMobile && toggle && id==="" &&(
-            <div>
-              <button className="font-semibold">Login/Signup</button>
-            </div>
-          )}
-        </div>
-        }
+        )}
       </nav>
 
       <Outlet />
@@ -304,9 +285,6 @@ const handleLogout=()=>{
             Private
           </p>
         </div>
-        {/* <div>
-
-</div> */}
       </footer>
     </div>
   );

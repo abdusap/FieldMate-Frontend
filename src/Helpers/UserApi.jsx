@@ -1,5 +1,3 @@
-// import axios from "axios";
-// import UserBaseApi from "../Config/Api";
 import UserBaseApi from "../Config/UserBaseApi"
 
 export const signupApi=async(data)=>{
@@ -90,5 +88,10 @@ export const profileUpdateApi=async(data)=>{
 
 export const profileimageApi=async(data)=>{
    const resData=await UserBaseApi.post('/profile_image',data)
+   return resData
+}
+
+export const getReviewsApi=async(id)=>{
+   const resData=await UserBaseApi.get(`/review?id=${id}`)
    return resData
 }

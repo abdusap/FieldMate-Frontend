@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UserBaseApi from '../Config/UserBaseApi'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 

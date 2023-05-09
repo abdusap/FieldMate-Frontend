@@ -2,13 +2,12 @@ import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../Components/Admin/Sidebar";
 
-
 function AdminLayout() {
-  const navigate=useNavigate()
-  const handleLogout=()=>{
-    localStorage.removeItem('admin')
-    navigate('/admin/login')
-  }
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("admin");
+    navigate("/admin/login");
+  };
   return (
     <div className="flex ">
       <Sidebar />
