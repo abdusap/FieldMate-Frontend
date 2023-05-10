@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { removeTurfId } from "../../Store/Slice/TurfIdSlice";
 
-
-
 function Navbar() {
   const [expand, setExpand] = useState(false);
   function toggleHandler() {
@@ -12,13 +10,13 @@ function Navbar() {
   }
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleLogout=()=>{
-    dispatch(removeTurfId())
-    localStorage.removeItem('turf')
-    navigate('/turf/login')
-  }
+  const handleLogout = () => {
+    dispatch(removeTurfId());
+    localStorage.removeItem("turf");
+    navigate("/turf/login");
+  };
   return (
     <>
       <div className="flex bg-black h-auto  p-3 md:p-5 flex-col w-fit ">
@@ -67,95 +65,105 @@ function Navbar() {
               {expand && <span className="text-white ">Dashboard</span>}
             </span>
           </NavLink>
-          <NavLink 
-          to={"details"}
-          className={({ isActive }) =>
-          isActive ? "text-red-600" : "text-white"
-        }>
-          <span className="text-white flex gap-1 mt-6">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-              />
-            </svg>
+          <NavLink
+            to={"details"}
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
+            <span className="text-white flex gap-1 mt-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
+                />
+              </svg>
 
-            {expand && <span className="text-white ">Details</span>}
-          </span>
+              {expand && <span className="text-white ">Details</span>}
+            </span>
           </NavLink>
-          <NavLink 
-          to={"slots"}
-          className={({ isActive }) =>
-          isActive ? "text-red-600" : "text-white"
-        }>
-          <span className="text-white flex gap-1 mt-6">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-center"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-              />
-            </svg>
+          <NavLink
+            to={"slots"}
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
+            <span className="text-white flex gap-1 mt-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-center"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                />
+              </svg>
 
-            {expand && <span className="text-white ">SlotManage</span>}
-          </span>
+              {expand && <span className="text-white ">SlotManage</span>}
+            </span>
           </NavLink>
-          {/* <span className="text-white flex gap-1 mt-6">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
-              />
-            </svg>
+          <NavLink
+            to={"report"}
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
+            <span className="text-white flex gap-1 mt-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
+                />
+              </svg>
 
-            {expand && <span className="text-white ">Tournament</span>}
-          </span> */}
-          <NavLink 
-          to={"review"}
-          className={({ isActive }) =>
-          isActive ? "text-red-600" : "text-white"
-        }>
-          <span className="text-white flex gap-1 mt-6">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6 text-white"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"
-              />
-            </svg>
+              {expand && <span className="text-white ">Report</span>}
+            </span>
+          </NavLink>
+          <NavLink
+            to={"review"}
+            className={({ isActive }) =>
+              isActive ? "text-red-600" : "text-white"
+            }
+          >
+            <span className="text-white flex gap-1 mt-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+                />
+              </svg>
 
-            {expand && <span className="text-white ">Reviews</span>}
-          </span>
+              {expand && <span className="text-white ">Reviews</span>}
+            </span>
           </NavLink>
           {/* <span className="text-white flex gap-1 mt-6">
             <svg
@@ -197,7 +205,6 @@ function Navbar() {
           </span>
         </div>
       </div>
-     
     </>
   );
 }

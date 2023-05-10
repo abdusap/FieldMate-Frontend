@@ -5,7 +5,7 @@ import { getReviewsApi, turfDetailsApi } from "../../Helpers/UserApi";
 import ReviewForm from "./ReviewForm";
 
 function TurfDetailsContainer() {
-   const user=localStorage.getItem('user')
+  const user = localStorage.getItem("user");
   const navigate = useNavigate();
   const [amenities, setAmenities] = useState([]);
   const [image, setImage] = useState([]);
@@ -35,23 +35,21 @@ function TurfDetailsContainer() {
     });
   }, []);
 
-  const handleClickSlot=()=>{
-   
-    if(user){
-      navigate("/slot_details", { state: turf._id })
+  const handleClickSlot = () => {
+    if (user) {
+      navigate("/slot_details", { state: turf._id });
+    } else {
+      navigate("/login");
     }
-    else{
-      navigate("/login")
-    }
-  }
+  };
 
-  const handleAddReview=()=>{
-    if(user){
-     setModal(!modal)
-    }else{
-      navigate("/login") 
+  const handleAddReview = () => {
+    if (user) {
+      setModal(!modal);
+    } else {
+      navigate("/login");
     }
-  }
+  };
   return (
     <>
       {loader ? (

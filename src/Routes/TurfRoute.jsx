@@ -8,7 +8,7 @@ import Details from "../Pages/TurfPortal/Details";
 import SlotManage from "../Pages/TurfPortal/SlotManage";
 import ProtectedRoute from "../Helpers/ProtectedRoute";
 import ReviewContainer from "../Components/TurfPortal/ReviewContainer";
-
+import Reports from "../Pages/TurfPortal/Reports";
 function TurfRoute() {
   return (
     <Routes>
@@ -19,11 +19,13 @@ function TurfRoute() {
           <Route path="dashboard" element={<Dashboard />}></Route>
           <Route path="details" element={<Details />}></Route>
           <Route path="slots" element={<SlotManage />}></Route>
+          <Route path="report" element={<Reports />}></Route>
           <Route path="review" element={<ReviewContainer />}></Route>
         </Route>
       </Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
+      <Route path="/*" element={"Not found"}></Route>
     </Routes>
   );
 }

@@ -28,6 +28,7 @@ function AdminRoute() {
             />
           </Route>
         </Route>
+        <Route path="/*" element={"Not found"}></Route>
       </Routes>
     </>
   );

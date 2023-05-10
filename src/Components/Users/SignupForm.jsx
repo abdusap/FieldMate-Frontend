@@ -1,20 +1,18 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { Tooltip } from 'react-tippy';
 import "react-tippy/dist/tippy.css";
 import validationSchema from "../../Validation/userSignupValidation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signupApi } from "../../Helpers/UserApi";
 import Swal from "sweetalert2";
-// import UserBase from "../../Config/Api";
 
-import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css';
+import { Tooltip } from "react-tippy";
+import "react-tippy/dist/tippy.css";
 import UserBaseApi from "../../Config/UserBaseApi";
 
 function SignupForm() {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = {
@@ -45,19 +43,18 @@ function SignupForm() {
               //   otp: otp,
               //   mobile: mobile,
               // };
-              formData.otp=otp
+              formData.otp = otp;
               console.log(formData);
-              return UserBaseApi
-                .post("/otp", formData)
+              return UserBaseApi.post("/otp", formData)
                 .then((response) => {
                   if (response.data.ok) {
                     Swal.fire({
                       title: "OTP verified!",
-                      text:"Your Account created successfully",
+                      text: "Your Account created successfully",
                       icon: "success",
-                    }).then(()=>{
-                      navigate('/login')
-                    })
+                    }).then(() => {
+                      navigate("/login");
+                    });
                   }
                   if (!response.data.ok) {
                     throw new Error();
@@ -125,14 +122,14 @@ function SignupForm() {
             className="border  w-full text-base px-2 focus:outline-none focus:border-gray-600 rounded h-9 mb-4"
           />
           <Tooltip title="Password must contain 6 character">
-          <input
-            type="password"
-            placeholder="Password"
-            required
-            className="border w-80 text-base px-2 focus:outline-none focus:border-gray-600 rounded h-9 mb-4"
+            <input
+              type="password"
+              placeholder="Password"
+              required
+              className="border w-80 text-base px-2 focus:outline-none focus:border-gray-600 rounded h-9 mb-4"
             />
-            </Tooltip>
-          
+          </Tooltip>
+
           {/* <p className="self-start">hshf</p> */}
           <input
             type="password"

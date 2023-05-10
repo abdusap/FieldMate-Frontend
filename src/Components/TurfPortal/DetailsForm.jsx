@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Select from 'react-select';
-import { getAllDetailsApi, turfDetailsApi } from '../../Helpers/TurfApi,';
+import { deleteImageApi, getAllDetailsApi, turfDetailsApi } from '../../Helpers/TurfApi,';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
-
 
 
 
@@ -35,7 +34,6 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal,setA
           return sportsId.includes(sports.value)
         })
         setSelectedOptions(matchedSports)
-        console.log(res.data.details.details.amenities);
         setAmenityData(res.data.details.details.amenities)
         setRulesData(res.data.details.details.rules)
     })
@@ -92,8 +90,6 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal,setA
       const handleImageChange = (e) => {
         
         const files = e.target.files;
-      //  console.log(files);
-      //   console.log(files.length);
         
         const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/;
       
@@ -116,10 +112,41 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal,setA
           setError(false);
           setImage(Images);
         }
-        // console.log(Images);
-        // console.log(error);
       };
+      
+      const handleDeleteImage=(name)=>{
+        const data={
+          id:turfId.id,
+          image:name
+        }
+Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    deleteImageApi(data).then((res)=>{
+      setUpdated(!updated)
+      if(res.data.success){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Changes has been saved',
+          showConfirmButton: false,
+          timer: 1200
+        })
+      }
+    })
+  }
+})
        
+      }
+
+
   return (
     <>
      <div className=' border-black border  rounded-xl w-4/5 px-6  h-[28rem] overflow-auto'>
@@ -196,7 +223,7 @@ function DetailsForm({amenityModal,setAmenityModal,rulesModal,setRulesModal,setA
       {turfDetails?.image && turfDetails.image.map((name)=>
        <div  className='relative ml-2 '>
         <img className='w-32 h-20' src={name} alt="Pictures" />
-        <p className='absolute top-0 right-2 text-xl font-bold text-red-700 cursor-pointer'>X</p>
+        <p onClick={()=>handleDeleteImage(name)} className='absolute top-0 right-2 text-xl font-bold text-red-700 cursor-pointer'>X</p>
       </div>
       )
 

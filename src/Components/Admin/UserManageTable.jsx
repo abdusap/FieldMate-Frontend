@@ -1,100 +1,105 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { blockUserApi, getAllUserApi } from '../../Helpers/AdminApi';
-import ConfirmSwal from '../../Helpers/ConfirmSwal';
+import { blockUserApi, getAllUserApi } from "../../Helpers/AdminApi";
+import ConfirmSwal from "../../Helpers/ConfirmSwal";
 
 function UserManageTable() {
-    const [users,setUsers]=useState([])
-    const [update,setUpdate]=useState(true)
-useEffect(()=>{
-    getAllUserApi().then((res)=>{
-        console.log(res.data.users);
-        setUsers(res.data.users)
-    })
-},[update])
-    const handleList=(id)=>{
-      ConfirmSwal(blockUserApi,id,()=>setUpdate(!update)).then((res)=>{
-          setUpdate(()=>!update)
-        
-      })
-    }
+  const [users, setUsers] = useState([]);
+  const [update, setUpdate] = useState(true);
+  useEffect(() => {
+    getAllUserApi().then((res) => {
+      console.log(res.data.users);
+      setUsers(res.data.users);
+    });
+  }, [update]);
+  const handleList = (id) => {
+    ConfirmSwal(blockUserApi, id, () => setUpdate(!update)).then((res) => {
+      setUpdate(() => !update);
+    });
+  };
 
+  const columns = [
+    {
+      name: "NO:",
+      selector: (row) => row.no,
+    },
+    {
+      name: "Name",
+      selector: (row) => row.name,
+    },
+    {
+      name: "Email",
+      selector: (row) => row.email,
+    },
+    {
+      name: "Mobile No:",
+      selector: (row) => row.mobile,
+    },
+    {
+      name: "Status",
+      selector: (row) =>
+        row.status ? (
+          <p className="text-green-700 font-semibold">Active</p>
+        ) : (
+          <p className="text-red-700 font-semibold">Block</p>
+        ),
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <button
+          className={`${
+            row.status ? "bg-red-500" : "bg-green-500"
+          } rounded text-white font-medium w-20 h-7`}
+          onClick={() => {
+            handleList(row.id);
+          }}
+        >
+          {row.status ? "Block" : "UnBlock"}
+        </button>
+      ),
+    },
+  ];
 
-    const columns = [
-        {
-          name: "NO:",
-          selector: (row) => row.no,
-        },
-        {
-          name: "Name",
-          selector: (row) => row.name,
-        },
-        {
-          name: "Email",
-          selector: (row) => row.email,
-        },
-        {
-          name: "Mobile No:",
-          selector: (row) => row.mobile,
-        },
-        {
-          name: "Status",
-          selector: (row) => (
-            row.status?<p className='text-green-700 font-semibold'>Active</p>:<p className='text-red-700 font-semibold'>Block</p>
-          )
-        },
-        {
-          name: "Action",
-          cell: (row) => (
-            <button
-              className={`${
-                row.status ?"bg-red-500": "bg-green-500"  
-              } rounded text-white font-medium w-20 h-7`}
-              onClick={() => { 
-                handleList(row.id);
-              }}
-            >
-              {row.status ? "Block" : "UnBlock"}
-            </button>
-          ),
-        },
-      ];
+  const style = {
+    rows: {
+      style: {
+        minWidth: "100px",
+        minHeight: "35px",
+        fontSize: "15px",
+      },
+    },
+    headCells: {
+      style: {
+        fontWeight: "bold",
+        fontSize: "14px",
+        textColor: "gray",
+        backgroundColor: "#F9FAFB",
+      },
+    },
+  };
 
-      const style = {
-        rows: {
-          style: {
-            minWidth: "100px",
-            minHeight: "35px",
-            fontSize: "15px",
-          },
-        },
-        headCells: {
-          style: {
-            fontWeight: "bold",
-            fontSize: "14px",
-            textColor: "gray",
-            backgroundColor: "#F9FAFB",
-          },
-        },
-      };
-
-      const tableData = users.map((value, i) => {
-        return {
-          id: value._id,
-          no: i + 1,
-          name: value.name,
-          email: value.email,
-          mobile: value.mobile,
-          status: value.status,
-        };
-      });
+  const tableData = users.map((value, i) => {
+    return {
+      id: value._id,
+      no: i + 1,
+      name: value.name,
+      email: value.email,
+      mobile: value.mobile,
+      status: value.status,
+    };
+  });
 
   return (
     <>
-        <DataTable columns={columns} data={tableData} customStyles={style} pagination
-    />
+      <DataTable
+        columns={columns}
+        data={tableData}
+        customStyles={style}
+        pagination
+      />
     </>
-  )
+  );
 }
 
-export default UserManageTable
+export default UserManageTable;

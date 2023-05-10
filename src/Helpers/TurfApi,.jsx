@@ -75,3 +75,8 @@ export const dashboardDetailsApi=async(id)=>{
     return resData
 }
 
+export const deleteImageApi=async(data)=>{
+    const resData =await TurfBaseApi.post('/delete_image',data)
+    return resData
+}
+

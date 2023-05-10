@@ -2,54 +2,52 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Select from "react-select";
 import { addSlotApi, getSlotApi } from "../../Helpers/TurfApi,";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { Slots } from "../../Helpers/SlotsTimingData";
 
-
 function AddSlotModal({ title, modal, setModal }) {
-    const turfId=useSelector((state)=>state.turf)
-  const [price,setPrice]=useState()
-  const [updated,setUpdated]=useState(true)
+  const turfId = useSelector((state) => state.turf);
+  const [price, setPrice] = useState();
+  const [updated, setUpdated] = useState(true);
   const [slots, setSlots] = useState(Slots);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  useEffect(()=>{
-    
-    getSlotApi(turfId.id).then((res)=>{
-        if(res.data.success){
-            const slot=res.data.slot.slots
-            setPrice(res.data.slot.price)
-            const selected=slots.filter((data)=>{
-                return slot.includes(data.value)
-            })
-            setSelectedOptions(selected)
-        }
-    })
-  },[updated])
+  useEffect(() => {
+    getSlotApi(turfId.id).then((res) => {
+      if (res.data.success) {
+        const slot = res.data.slot.slots;
+        setPrice(res.data.slot.price);
+        const selected = slots.filter((data) => {
+          return slot.includes(data.value);
+        });
+        setSelectedOptions(selected);
+      }
+    });
+  }, [updated]);
   const handleMultiSelectChange = (selectedOptions) => {
     setSelectedOptions(selectedOptions);
   };
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-    const slots=selectedOptions.map((data)=>data.value)
-    const price=e.target[0].value
-    const data={
-        turfId:turfId,
-        slots:slots,
-        price:price
-    }
-    addSlotApi(data).then((res)=>{
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Changes has been saved',
-          showConfirmButton: false,
-          timer: 1200
-        }).then(()=>{
-          setModal(!modal)
-          setUpdated(!updated)
-        })
-    })
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const slots = selectedOptions.map((data) => data.value);
+    const price = e.target[0].value;
+    const data = {
+      turfId: turfId,
+      slots: slots,
+      price: price,
+    };
+    addSlotApi(data).then((res) => {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Changes has been saved",
+        showConfirmButton: false,
+        timer: 1200,
+      }).then(() => {
+        setModal(!modal);
+        setUpdated(!updated);
+      });
+    });
+  };
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
@@ -72,7 +70,7 @@ function AddSlotModal({ title, modal, setModal }) {
               </label>
               <input
                 value={price}
-                onChange={(e)=>setPrice(e.target.value)}
+                onChange={(e) => setPrice(e.target.value)}
                 type="number"
                 name="price"
                 id="first_name"
