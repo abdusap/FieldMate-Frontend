@@ -56,7 +56,7 @@ function FilterForm({locationId,setLocationId,sportsId,setSportsId,handleSubmit}
   </ul>
 </div>
 
-<button className='w-fit h-fit bg-blue-600 text-white px-1 rounded-md mb-3 mt-2'>Submit</button>
+<button className='w-fit h-fit bg-blue-600 text-white px-1 rounded-md mb-3 mt-2'>Reset</button>
 </form>
         </div>
     </>

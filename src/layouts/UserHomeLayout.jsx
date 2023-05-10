@@ -4,21 +4,21 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { removeUser } from "../Store/Slice/UserSlice";
 import { SearchContext } from "../Context/SearchContext";
 import { getAllSports } from "../Helpers/UserApi";
-// import {userSlic}
-// useSelector()
+
 
 function UserHomeLayout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { search, setSearch } = useContext(SearchContext);
+  const {setSports}=useContext(SearchContext)
   const { id, name } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [sports, setSports] = useState([]);
+  const [Sports, setSport] = useState([]);
   useEffect(() => {
     getAllSports().then((res) => {
-      setSports(res.data.sports);
+      setSport(res.data.sports);
     });
   }, []);
   const handleSubmit = (e) => {
@@ -72,7 +72,9 @@ function UserHomeLayout() {
       ></div>
       <nav className="">
         <div className="flex justify-between flex-row w-full  bg-white p-1 md:pl-6 border-b-2 border-slate-200  ">
+          <Link to={'/'}>
           <img src="./image/logo.png" className="w-36 md:w-48 " alt="logo" />
+          </Link>
           {!isMobile && (
             <div className="self-center ">
               <form onSubmit={handleSubmit}>
@@ -194,11 +196,13 @@ function UserHomeLayout() {
             )}
             {
               <>
-                {sports?.map((data) => (
+                {Sports?.map((data) => (
                   <div className="">
                     <button
-                      onClick={() =>
-                        navigate("/turf_listing", { state: data.name })
+                      onClick={() =>{                       
+                        navigate("/turf_listing", { state: data.name });
+                        setSports(data.name)
+                      }
                       }
                     >
                       {data.name}
