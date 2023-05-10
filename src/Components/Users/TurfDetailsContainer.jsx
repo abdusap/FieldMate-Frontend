@@ -98,7 +98,7 @@ function TurfDetailsContainer() {
 
               <p className="text-base font-bold mt-2">Amenities</p>
               <ul className="list-disc ml-6">
-                {amenities.map((data) => (
+                {amenities?.map((data) => (
                   <li>{data}</li>
                 ))}
               </ul>
@@ -123,7 +123,7 @@ function TurfDetailsContainer() {
             Flat 30% off</p> */}
               <p className="text-base font-bold mb-1">Venue Rules</p>
               <ul className="list-disc ml-6">
-                {rules.map((data) => (
+                {rules?.map((data) => (
                   <li>{data}</li>
                 ))}
               </ul>
